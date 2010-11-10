@@ -61,7 +61,7 @@ class AboutCaseClasses extends KoanSuite with ShouldMatchers {
     d1.breed should be ("Doberman")
 
     // what happens if you uncomment the line below? Why?
-    // d1.name = "Scooby Doo"
+    //d1.name = "Scooby Doo"
   }
 
   koan("Case classes can have mutable properties") {

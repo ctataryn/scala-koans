@@ -5,3 +5,5 @@ scala-koans.iws
 scala-koans.ipr
 scala-koans.iml
 target
+.*\.DS_Store
+.*\.zip

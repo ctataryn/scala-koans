@@ -46,7 +46,7 @@ trait KoanSuite extends FunSuite {
         testName match {
           case Some(tn) => runTest(tn, reporter, stopRequested, configMap, tracker)
           case None =>
-            val tests = testNames.elements
+            val tests = testNames.iterator
             var failed = false
             for (test <- tests) {
               if (failed == false) {
