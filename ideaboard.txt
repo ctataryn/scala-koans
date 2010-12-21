@@ -21,7 +21,7 @@ lambda
 currying / pfa
 null option types
 mutation
-type signatures
+type signatures (dhinojosa: In Process)
 reflection
 scala properties - set date / use earlier date
 
