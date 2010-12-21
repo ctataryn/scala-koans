@@ -1,22 +1,22 @@
-Test asserts - Message, bool, etc.
-Nothing values
-Tuples - syntax
+Test asserts - Message, bool, etc. (DMarsh: done)
+Nothing values (DMarsh: done)
+Tuples - syntax  (DMarsh: done)
 Pattern Matching
 Functions returning functions
 Functions taking functions
 if expressions
-for comprehensions
-immutability/side effects
+for comprehensions  (DMarsh: done)
+immutability/side effects (DMarsh: done ?? Do we have enough here??)
 state identity lifetime
-collections array, list
-map, reduce, filter
+collections array, list (DMarsh: Done, also maps and mutable maps, sets and mutable sets)
+map, reduce, filter (DMarsh: Done ?? covered in various collection classes)
 classes
 lists / cons
 memoization
 lazy sequences
 recursion
 traits / mixins
-recrusive list processing
+recursive list processing
 lambda
 currying / pfa
 null option types
@@ -24,4 +24,9 @@ mutation
 type signatures
 reflection
 scala properties - set date / use earlier date
+
+case classes (DMarsh: Done)
+preconditions (DMarsh: Done)
+uniform access principle (DMarsh: Done)
+named/default args (DMarsh: done)
                     
