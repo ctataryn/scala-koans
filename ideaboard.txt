@@ -1,32 +1,38 @@
+Putting these in order because some koan packages are prerequisites of others.
+Feel free to put it in logical order so that
+
+
 Test asserts - Message, bool, etc. (DMarsh: done)
 Nothing values (DMarsh: done)
+uniform access principle (DMarsh: Done)
+named/default args (DMarsh: done)
 Tuples - syntax  (DMarsh: done)
-Pattern Matching
+Preconditions (DMarsh: Done)
 Functions returning functions
 Functions taking functions
 if expressions
 for comprehensions  (DMarsh: done)
-immutability/side effects (DMarsh: done ?? Do we have enough here??)
-state identity lifetime
+classes
+mutation
+lists / cons
 collections array, list (DMarsh: Done, also maps and mutable maps, sets and mutable sets)
 map, reduce, filter (DMarsh: Done ?? covered in various collection classes)
-classes
-lists / cons
-memoization
+immutability/side effects (DMarsh: done ?? Do we have enough here??)
 lazy sequences
 recursion
+currying / pfa
+case classes (DMarsh: Done)
+Pattern Matching
 traits / mixins
+type signatures (dhinojosa: In Process)
+state identity lifetime
+memoization
 recursive list processing
 lambda
-currying / pfa
 null option types
-mutation
-type signatures (dhinojosa: In Process)
 reflection
 scala properties - set date / use earlier date
 
-case classes (DMarsh: Done)
-preconditions (DMarsh: Done)
-uniform access principle (DMarsh: Done)
-named/default args (DMarsh: done)
+
+
                     
