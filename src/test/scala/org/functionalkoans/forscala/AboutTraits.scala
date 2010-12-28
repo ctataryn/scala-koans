@@ -76,6 +76,8 @@ class AboutTraits extends KoanSuite with ShouldMatchers {
 
     myListener.isInstanceOf[MyListener] should be(true)
     myListener.isInstanceOf[EventListener] should be(true)
+    myListener.isInstanceOf[Any] should be(true)
+    myListener.isInstanceOf[AnyRef] should be(true)
   }
 
   koan("Traits can have concrete implementations that can be mixed into concrete classes with it's own state") {
