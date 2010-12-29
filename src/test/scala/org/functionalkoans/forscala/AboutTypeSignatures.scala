@@ -105,4 +105,10 @@ class AboutTypeSignatures extends KoanSuite with ShouldMatchers {
       intRand.asInstanceOf[String]  //intRand cannot be cast to String
     }
   }
+
+  koan("null.asInstanceOf[className] can be used to generate basic default values") {
+      null.asInstanceOf[String] should be (null)
+      null.asInstanceOf[Int] should be (0)
+      null.asInstanceOf[Short] should be (0)
+  }
 }
