@@ -1,7 +1,7 @@
 Test asserts - Message, bool, etc. (DMarsh: done)
 Nothing values (DMarsh: done)
 Tuples - syntax  (DMarsh: done)
-Pattern Matching
+Pattern Matching (DMarsh: done ?? Should we add more)
 Functions returning functions
 Functions taking functions
 if expressions
