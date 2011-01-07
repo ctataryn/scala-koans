@@ -2,6 +2,7 @@ package org.functionalkoans.forscala
 
 import org.scalatest.matchers.ShouldMatchers
 import support.KoanSuite
+
 /**
  *
  * This should come after traits
@@ -102,13 +103,19 @@ class AboutTypeSignatures extends KoanSuite with ShouldMatchers {
     val intRand = new IntRandomizer
 
     intercept[ClassCastException] {
-      intRand.asInstanceOf[String]  //intRand cannot be cast to String
+      intRand.asInstanceOf[String] //intRand cannot be cast to String
     }
   }
 
   koan("null.asInstanceOf[className] can be used to generate basic default values") {
-      null.asInstanceOf[String] should be (null)
-      null.asInstanceOf[Int] should be (0)
-      null.asInstanceOf[Short] should be (0)
+    null.asInstanceOf[String] should be(null)
+    null.asInstanceOf[Int] should be(0)
+    null.asInstanceOf[Short] should be(0)
   }
+
+  koan("abstract override is used as a modifier that requires that a concrete class ") {}
+
+  koan("() => Unit is a type, and so is => Unit, and so is Int, Int => Int") {}   //TODO:Verify I got that right
+
+
 }
