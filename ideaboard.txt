@@ -13,7 +13,7 @@ Functions returning functions
 Functions taking functions
 if expressions
 for comprehensions  (DMarsh: done)
-imports and packages (dhinojosa:In Process)
+imports, packages, and visibility (dhinojosa:In Process)
 classes  (dhinojosa:In Process)
 mutation
 lists / cons
