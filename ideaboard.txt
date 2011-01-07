@@ -13,7 +13,8 @@ Functions returning functions
 Functions taking functions
 if expressions
 for comprehensions  (DMarsh: done)
-classes
+imports and packages (dhinojosa:In Process)
+classes  (dhinojosa:In Process)
 mutation
 lists / cons
 collections array, list (DMarsh: Done, also maps and mutable maps, sets and mutable sets)
@@ -24,7 +25,7 @@ recursion
 currying / pfa
 case classes (DMarsh: Done)
 Pattern Matching
-traits / mixins
+traits / mixins  (dhinojosa: In Process)
 type signatures (dhinojosa: In Process)
 state identity lifetime
 memoization
