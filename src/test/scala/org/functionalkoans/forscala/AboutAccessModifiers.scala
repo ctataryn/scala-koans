@@ -13,12 +13,16 @@ package harkonnen {
       protected val spice = "Oregano"
     }
 
-    private class GammaBase {
-
+    private class GammaBase(private val spice:String) {
+      def areYouAsSpicyAsMe_?(gammaBase: GammaBase) = {
+        spice == gammaBase.spice
+      }
     }
 
-    class DeltaBase {
-      private[this] val spice = "Melange"
+    class DeltaBase (private[this] val spice:String = "Melange") {
+      def areYouAsSpicyAsMe_?(deltaBase: DeltaBase) = {
+        //spice == deltaBase.spice //not accessible
+      }
     }
 
 
@@ -40,9 +44,16 @@ package harkonnen {
       }
 
       koan("A private[this] access modifier guarantees that the member is only accessible within the object") {
-        val deltaBase = new DeltaBase()
-        //deltaBase.spice is not accessible
+        val deltaBase = new DeltaBase("Scary Spice")
+        val deltaBase2 = new DeltaBase("Scary Spice")
+        deltaBase.areYouAsSpicyAsMe_?(deltaBase2)
 
+      }
+
+      koan("A private access modifier can be inspected by another object of the same type") {
+         val gammaBase = new GammaBase("Sporty Spice")
+         val gammaBase2 = new GammaBase("Sporty Spice")
+         gammaBase.areYouAsSpicyAsMe_?(gammaBase2) should be (true)
       }
     }
 }
