@@ -5,84 +5,192 @@ import support.KoanSuite
 
 package harkonnen {
 
-    class AlphaBase
+  class AlphaBase {
+    private val melange = 1
+    private[this] val oregano = 2
+    private[AlphaBase] val tarragon = 3
+    private[harkonnen] val rosemary = 4
 
-    class AlphaExtendBase extends AlphaBase
+    val parsley = 5
+    //    public val ginger = 6  //does not exist, in case you were wondering
+    //    public[this] val lemongrass = 7   //does not exist, in case you were wondering
+    //    public[AlphaBase] val carob = 8   //does not exist, in case you were wondering
+    //    public[har] val celerySeed = 9  //does not exist, in case you were wondering
 
-    protected class BetaBase {
-      protected val spice = "Oregano"
+    protected val sage = 10
+    protected[this] val paprika = 11
+    protected[AlphaBase] val saffron = 12
+    protected[harkonnen] val thyme = 13
+  }
+
+  class BetaBase extends AlphaBase with KoanSuite with ShouldMatchers {
+    val param: AlphaBase = new AlphaBase
+
+    koan("With private keywords: Only private[packagename] members can be accessed via inheritance") {
+      //melange should be(1) //not accessible
+      //oregano should be (2) //not accessible
+      //tarragon should be (3) //not accessible
+      rosemary should be(4)
     }
 
-    private class GammaBase(private val spice:String) {
-      def areYouAsSpicyAsMe_?(gammaBase: GammaBase) = {
-        spice == gammaBase.spice
-      }
+    koan("With private keywords: Only private[packagename] members can be accessed via parameter") {
+      //param.melange should be (1) //not accessible
+      //param.oregano should be (2) //not accessible
+      //param.tarragon should be (3) //not accessible
+      param.rosemary should be(4)
     }
 
-    class DeltaBase (private[this] val spice:String = "Melange") {
-      def areYouAsSpicyAsMe_?(deltaBase: DeltaBase) = {
-        //spice == deltaBase.spice //not accessible
-      }
+    koan("With public keywords: All members can be accessed through inheritance") {
+      parsley should be(5)
     }
 
-
-    class AboutAccessModifiersHarkonnen extends KoanSuite with ShouldMatchers {
-      koan("All classes are public by default") {
-        val a = new harkonnen.AlphaBase();
-      }
-
-      koan("A protected class can be read in the same package") {
-         val b = new harkonnen.BetaBase();
-      }
-
-      koan("Protected can only be accessed within a class or by a subclass") {
-        class HarkonnenSoldier extends harkonnen.BetaBase {
-           spice should be ("Oregano")
-        }
-
-        val harkonnenSolider = new HarkonnenSoldier
-      }
-
-      koan("A private[this] access modifier guarantees that the member is only accessible within the object") {
-        val deltaBase = new DeltaBase("Scary Spice")
-        val deltaBase2 = new DeltaBase("Scary Spice")
-        deltaBase.areYouAsSpicyAsMe_?(deltaBase2)
-
-      }
-
-      koan("A private access modifier can be inspected by another object of the same type") {
-         val gammaBase = new GammaBase("Sporty Spice")
-         val gammaBase2 = new GammaBase("Sporty Spice")
-         gammaBase.areYouAsSpicyAsMe_?(gammaBase2) should be (true)
-      }
+    koan("With public keywords: All members can be accessed can be accessed via parameter") {
+      param.parsley should be(5)
     }
-}
 
+    koan("With protected keywords: All members can be accessed via inheritance") {
+      sage should be(10)
+      paprika should be(11) //not accessible
+      saffron should be(12) //not accessible
+      thyme should be(13)
+    }
 
-package ordos {
-    class AlphaBase
+    koan("With protected keywords: Only private[packagename] members can be accessed via parameter") {
+      //param.sage should be (10) //not accessible
+      //param.paprika should be (11) //not accessible
+      //param.saffron should be (12) //not accessible
+      param.thyme should be(13)
+    }
+  }
 
-    class AlphaExtendBase extends AlphaBase
+  class GammaBase extends KoanSuite with ShouldMatchers {
 
-    class BetaBase
+    val param: AlphaBase = new AlphaBase
 
-    private class GammaBase
+    koan("With private keywords: No members can be accessed via inheritance") {
+      //melange should be(1) //not accessible
+      //oregano should be (2) //not accessible
+      //tarragon should be (3) //not accessible
+      //rosemary should be(4)  //not accessible
+    }
+
+    koan("With private keywords: Only private[packagename] members can be accessed via parameter") {
+      //param.melange should be (1) //not accessible
+      //param.oregano should be (2) //not accessible
+      //param.tarragon should be (3) //not accessible
+      param.rosemary should be(4)
+    }
+
+    koan("With public keywords: All members can be accessed through inheritance") {
+      //parsley should be(5)  //not accessible
+    }
+
+    koan("With public keywords: All members can be accessed can be accessed via parameter") {
+      param.parsley should be(5)
+    }
+
+    koan("With protected keywords: All members can be accessed via inheritance") {
+      //sage should be (10)
+      //paprika should be (11) //not accessible
+      //saffron should be (12) //not accessible
+      //thyme should be (13)
+    }
+
+    koan("With protected keywords: Only private[packagename] members can be accessed via parameter") {
+      //    param.sage should be (10) //not accessible
+      //    param.paprika should be (11) //not accessible
+      //    param.saffron should be (12) //not accessible
+      param.thyme should be(13)
+    }
+  }
+
 }
 
 package atreides {
-    class AboutAccessModifiersAtreides extends KoanSuite with ShouldMatchers {
-      koan("All classes are public by default") {
-        val a = new harkonnen.AlphaBase();
-        //val b = new harkonnen.BetaBase(); Cannot access
-      }
 
-      koan("Protected can only be accessed within a class or by a subclass") {
-        // class HarkonnenSpy extends harkonnen.BetaBase; Cannot Access
-      }
+  import org.functionalkoans.forscala.harkonnen.AlphaBase
+
+  class DeltaBase extends AlphaBase with KoanSuite with ShouldMatchers {
+    val param: AlphaBase = new AlphaBase
+
+    koan("With private keywords: Only private and private[packagename] members can be accessed via inheritance") {
+      //melange should be (1)
+      //oregano should be (2) //not accessible
+      //tarragon should be (3) //not accessible
+      //rosemary should be (4)
     }
+
+    koan("With private keywords: Only private[packagename] members can be accessed via parameter") {
+      //    param.melange should be (1) //not accessible
+      //    param.oregano should be (2) //not accessible
+      //    param.tarragon should be (3) //not accessible
+      //    param.rosemary should be(4)  //not accessible
+    }
+
+    koan("With public keywords: All members can be accessed through inheritance") {
+      parsley should be(5)
+    }
+
+    koan("With public keywords: All members can be accessed can be accessed via parameter") {
+      param.parsley should be(5)
+    }
+
+    koan("With protected keywords: All members can be accessed via inheritance") {
+      sage should be(10)
+      paprika should be(11) //not accessible
+      saffron should be(12) //not accessible
+      thyme should be(13)
+    }
+
+    koan("With protected keywords: Only private[packagename] members can be accessed via parameter") {
+      //param.sage should be (10) //not accessible
+      //param.paprika should be (11) //not accessible
+      //param.saffron should be (12) //not accessible
+      //param.thyme should be (13)
+    }
+  }
+
+  class EpsilonBase extends KoanSuite with ShouldMatchers {
+    val param: AlphaBase = new AlphaBase
+
+    koan("With private keywords: Only private and private[packagename] members can be accessed via inheritance") {
+      //    melange should be (1) //not accessible
+      //    oregano should be (2) //not accessible
+      //    tarragon should be (3) //not accessible
+      //    rosemary should be (4) //not accessible
+    }
+
+    koan("With private keywords: Only private[packagename] members can be accessed via parameter") {
+      //    param.melange should be (1) //not accessible
+      //    param.oregano should be (2) //not accessible
+      //    param.tarragon should be (3) //not accessible
+      //    param.rosemary should be(4) //not accessible
+    }
+
+    koan("With public keywords: All members can be accessed through inheritance") {
+      //    parsley should be(5)
+    }
+
+    koan("With public keywords: All members can be accessed can be accessed via parameter") {
+      param.parsley should be(5)
+    }
+
+    koan("With protected keywords: All members can be accessed via inheritance") {
+      //    sage should be (10)
+      //    paprika should be (11) //not accessible
+      //    saffron should be (12) //not accessible
+      //    thyme should be (13)
+    }
+
+    koan("With protected keywords: Only private[packagename] members can be accessed via parameter") {
+      //    param.sage should be (10) //not accessible
+      //    param.paprika should be (11) //not accessible
+      //    param.saffron should be (12) //not accessible
+      //    param.thyme should be (13)
+    }
+  }
 }
 
-
-class AboutAccessModifiers extends KoanSuite with ShouldMatchers  {
+class AboutAccessModifiers extends KoanSuite with ShouldMatchers {
 
 }
