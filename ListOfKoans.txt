@@ -7,14 +7,16 @@ AboutNamedAndDefaultArguments.scala
 AboutTuples.scala
 AboutLists.scala
 AboutMaps.scala
-AboutMutableMaps.scala
 AboutSets.scala
+AboutMutableMaps.scala
 AboutMutableSets.scala
+AboutSequencesAndArrays.scala
 
 AboutPatternMatching.scala
 AboutCaseClasses.scala
 AboutOptions.scala
 AboutEmptyValues.scala
+AboutParentClasses.scala
 
 AboutAccessModifiers.scala
 AboutImportsAndPackages.scala
@@ -22,9 +24,7 @@ AboutImportsAndPackages.scala
 AboutLazySequences.scala
 AboutHigherOrderFunctions.scala
 
-AboutParentClasses.scala
 AboutPreconditions.scala
-AboutSequencesAndArrays.scala
 AboutTraits.scala
 AboutTypeSignatures.scala
 AboutUniformAccessPrinciple.scala
