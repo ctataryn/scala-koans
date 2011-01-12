@@ -5,7 +5,7 @@ import support.KoanSuite
 
 package harkonnen {
 
-  class AlphaBase {
+  class AlphaBase extends KoanSuite with ShouldMatchers {
     private val melange = 1
     private[this] val oregano = 2
     private[AlphaBase] val tarragon = 3
@@ -22,6 +22,8 @@ package harkonnen {
     protected[AlphaBase] val saffron = 12
     protected[harkonnen] val thyme = 13
   }
+
+
 
   class BetaBase extends AlphaBase with KoanSuite with ShouldMatchers {
     val param: AlphaBase = new AlphaBase
@@ -78,7 +80,7 @@ package harkonnen {
       //param.melange should be (1) //not accessible
       //param.oregano should be (2) //not accessible
       //param.tarragon should be (3) //not accessible
-      param.rosemary should be(4)
+      param.rosemary should be (4)
     }
 
     koan("With public keywords: All members can be accessed through inheritance") {
