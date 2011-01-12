@@ -27,6 +27,7 @@ class PathToEnlightenmentTest extends Suite {
                                    new AboutAccessModifiers,
                                    new AboutTypeSignatures,
                                    new AboutTraits,
+                                   new AboutImportsAndPackages,
                                    new AboutPreconditions,
                                    new AboutHigherOrderFunctions,
                                    new AboutUniformAccessPrinciple
