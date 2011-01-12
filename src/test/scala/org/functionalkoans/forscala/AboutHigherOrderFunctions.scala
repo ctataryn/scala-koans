@@ -38,6 +38,7 @@ class AboutHigherOrderFunctions extends KoanSuite with ShouldMatchers {
     fiveAdder(5) should be(10)
   }
   
+  
   koan("function taking another function as parameter. Helps in compositioning functions") { 
     def makeUpper(xs: List[String]) = xs map { _.toUpperCase() }
     def makeWhatEverYouLike(xs: List[String], sideEffect: String => String) = {
