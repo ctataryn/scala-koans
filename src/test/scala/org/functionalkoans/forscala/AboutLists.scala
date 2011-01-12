@@ -31,7 +31,7 @@ class AboutLists extends KoanSuite with ShouldMatchers {
         a.tail should equal (List(2,3))
     }
 
-    koan ("Lists can accessed at random") {
+    koan ("Lists can be accessed at random") {
         val a = List(1,3,5,7,9)
         a(0) should equal (1)
         a(2) should equal (5)
