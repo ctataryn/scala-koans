@@ -20,7 +20,7 @@ lists / cons
 collections array, list (DMarsh: Done, also maps and mutable maps, sets and mutable sets)
 map, reduce, filter (DMarsh: Done ?? covered in various collection classes)
 immutability/side effects (DMarsh: done ?? Do we have enough here??)
-lazy sequences
+lazy sequences (Nilanjan)
 recursion
 currying / pfa
 case classes (DMarsh: Done)
@@ -31,7 +31,7 @@ state identity lifetime
 memoization
 recursive list processing
 lambda
-null option types
+null option types (Nilanjan)
 reflection
 scala properties - set date / use earlier date
 
