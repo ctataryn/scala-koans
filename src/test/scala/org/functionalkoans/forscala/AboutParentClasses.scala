@@ -3,16 +3,6 @@ package org.functionalkoans.forscala
 import org.scalatest.matchers.ShouldMatchers
 import support.KoanSuite
 
-/**
- * Created by Daniel Hinojosa
- * User: Daniel Hinojosa
- * Date: 1/6/11
- * Time: 9:32 PM
- * url: <a href="http://www.evolutionnext.com">http://www.evolutionnext.com</a>
- * email: <a href="mailto:dhinojosa@evolutionnext.com">dhinojosa@evolutionnext.com</a>
- * tel: 505.363.5832
- */
-
 class AboutParentClasses extends KoanSuite with ShouldMatchers {
   koan("Class heirarchy is linear, a class can only extend from one parent class") {
     class Worker(firstName: String, lastName: String) {}
