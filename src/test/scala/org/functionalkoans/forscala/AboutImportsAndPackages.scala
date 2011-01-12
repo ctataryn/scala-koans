@@ -1,4 +1,4 @@
-package org.functionalkoans.forscala.packages
+package org.functionalkoans.forscala
 
 import org.scalatest.matchers.ShouldMatchers
 import org.functionalkoans.forscala.support.KoanSuite
@@ -30,19 +30,22 @@ package album {
 }
 
 package media {
-   class AboutReferencingAbsolutePackages extends KoanSuite with ShouldMatchers {
-       import org.functionalkoans.forscala.packages.album.Album  // <<< Note the import style
+
+
+
+class AboutReferencingAbsolutePackages extends KoanSuite with ShouldMatchers {
+       import org.functionalkoans.forscala.album.Album  // <<< Note the import style
        koan("A import can be done based from absolute package heirarchy")  {
           val stLouisBlues = new Album("St. Louis Blues", 1940, new Artist("Louie", "Armstrong"))
-          stLouisBlues.getClass.getCanonicalName should be ("org.functionalkoans.forscala.packages.album.Album")
+          stLouisBlues.getClass.getCanonicalName should be ("org.functionalkoans.forscala.album.Album")
        }
    }
 
    class AboutReferencingAbsoluteRootPackages extends KoanSuite with ShouldMatchers {
-       import _root_.org.functionalkoans.forscala.packages.album.Album  // <<< Note the import style
+       import _root_.org.functionalkoans.forscala.album.Album  // <<< Note the import style
        koan("A import can be done based from absolute root package heirarchy using _root_")  {
           val stLouisBlues = new Album("St. Louis Blues", 1940, new Artist("Louie", "Armstrong"))
-          stLouisBlues.getClass.getCanonicalName should be ("org.functionalkoans.forscala.packages.album.Album")
+          stLouisBlues.getClass.getCanonicalName should be ("org.functionalkoans.forscala.album.Album")
        }
    }
 
@@ -50,7 +53,7 @@ package media {
        import album.Album  // <<< Note the import style
        koan("A import can be done based from relative packaging")  {
           val stLouisBlues = new Album("St. Louis Blues", 1940, new Artist("Louie", "Armstrong"))
-          stLouisBlues.getClass.getCanonicalName should be ("org.functionalkoans.forscala.packages.album.Album")
+          stLouisBlues.getClass.getCanonicalName should be ("org.functionalkoans.forscala.album.Album")
        }
    }
 }
