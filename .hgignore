@@ -7,3 +7,4 @@ scala-koans.iml
 target
 .*\.DS_Store
 .*\.zip
+.idea*
