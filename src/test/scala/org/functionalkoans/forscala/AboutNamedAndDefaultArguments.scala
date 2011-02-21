@@ -76,6 +76,13 @@ koan("can default class parameters and have default arguments too") {
 	
 	myColor should equal(0, 325, 100)
 }
+koan("default parameters can be functional too") {
+      def reduce(a: Int, f: (Int, Int) => Int = (_ + _)): Int = f(a,a)
+      
+      reduce(5) should equal (__)
+      reduce(5, _ * _) should equal (__)
+  }
+
 
 }
 
