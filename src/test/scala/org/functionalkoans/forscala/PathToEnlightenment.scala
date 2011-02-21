@@ -4,12 +4,12 @@ import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
 
 @RunWith(classOf[JUnitRunner])
-class PathToEnlightenmentTest extends Suite {
+class PathToEnlightenment extends Suite {
+
+
   override def nestedSuites = List(new AboutAsserts,
                                    new AboutValAndVar,
 				   new AboutConstructors,
-				   new AboutForExpressions,
-                                   new AboutNamedAndDefaultArguments,
                                    new AboutTuples,
                                    new AboutLists,
                                    new AboutMaps,
@@ -20,10 +20,10 @@ class PathToEnlightenmentTest extends Suite {
                                    new AboutCaseClasses,
                                    new AboutOptions,
                                    new AboutSequencesAndArrays,
-                   
+                                   new AboutNamedAndDefaultArguments,
+				   new AboutForExpressions,
                                    new AboutEmptyValues,
                                    new AboutParentClasses,
-                                   new AboutLists,
                                    new AboutAccessModifiers,
                                    new AboutTypeSignatures,
                                    new AboutTraits,
@@ -33,5 +33,9 @@ class PathToEnlightenmentTest extends Suite {
                                    new AboutUniformAccessPrinciple
 
 )
+
+
+
+
 
 }
