@@ -97,9 +97,21 @@ class AboutLists extends KoanSuite with ShouldMatchers {
         a.foldLeft(0)( _ * _ ) should equal (0)
     }
 
-  koan ("You can create a list from a range") {
-    val a = (1 to 5).toList
-    a should be (List(1,2,3,4,5))
-  }
+    koan ("You can create a list from a range") {
+      val a = (1 to 5).toList
+      a should be (List(1,2,3,4,5))
+    }
+
+    koan ("Lists reuse their tails") {
+      val d = Nil
+      val c = 3 :: d
+      val b = 2 :: c
+      val a = 1 :: b
+
+      a should be (List(1,2,3))
+      a.tail should be (List(2, 3))
+      b.tail should be (List(3))
+      c.tail should be (List())
+    }
 
 }
