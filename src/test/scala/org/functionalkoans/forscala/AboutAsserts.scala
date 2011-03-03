@@ -2,6 +2,7 @@ package org.functionalkoans.forscala
 
 import org.scalatest.matchers.ShouldMatchers
 import support.BlankValues.__
+import support.Blankout.blank
 import support.KoanSuite
 
 class AboutAsserts extends KoanSuite with ShouldMatchers {
@@ -21,7 +22,6 @@ class AboutAsserts extends KoanSuite with ShouldMatchers {
   koan("should match two equal values") {
     val v1 = 4
     val v2 = 4
-
     assert(v1 === v2)
   }
 
