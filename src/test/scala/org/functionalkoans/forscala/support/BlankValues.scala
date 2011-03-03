@@ -9,3 +9,8 @@ object BlankValues {
     }
 }
 
+
+object Blankout {
+  def blank[T](t:T):T = t
+}
+
