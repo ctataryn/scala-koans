@@ -1,7 +1,6 @@
 package org.functionalkoans.forscala
 
 import support.KoanSuite
-import support.BlankValues._
 import org.scalatest.matchers.ShouldMatchers
 
 class AboutPatternMatching extends KoanSuite with ShouldMatchers {
@@ -65,7 +64,6 @@ class AboutPatternMatching extends KoanSuite with ShouldMatchers {
   }
   koan("Pattern matching can substitute parts of expressions") {
 
-
     def goldilocks(expr: Any) = expr match {
       case ("porridge", bear) => bear + " said someone's been eating my porridge"
       case ("chair", bear) => bear + " said someone's been sitting in my chair"
@@ -75,8 +73,21 @@ class AboutPatternMatching extends KoanSuite with ShouldMatchers {
 
     goldilocks(("porridge", "Papa")) should be("Papa said someone's been eating my porridge")
     goldilocks(("chair", "Mama")) should be("Mama said someone's been sitting in my chair")
-
   }
 
+  koan("Pattern matching can done on regular expression groups") {
+    val EatingRegularExpression = """Eating Alert: bear=([^,]+),\s+source=(.+)""".r
+    val SittingRegularExpression = """Sitting Alert: bear=([^,]+),\s+source=(.+)""".r
+    val SleepingRegularExpression = """Sleeping Alert: bear=([^,]+),\s+source=(.+)""".r
 
+    def goldilocks(expr: String) = expr match {
+      case (EatingRegularExpression(bear, source)) => "%s said someone's been eating my %s".format(bear, source)
+      case (SittingRegularExpression(bear, source)) => "%s said someone's been sitting on my %s".format(bear, source)
+      case (SleepingRegularExpression(bear, source)) => "%s said someone's been sleeping in my %s".format(bear, source)
+      case _ => "what?"
+    }
+
+    goldilocks("Eating Alert: bear=Papa, source=porridge") should be("Papa said someone's been eating my porridge")
+    goldilocks("Sitting Alert: bear=Mama, source=chair") should be("Mama said someone's been sitting on my chair")
+  }
 }
