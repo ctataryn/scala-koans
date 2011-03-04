@@ -10,6 +10,7 @@ class PathToEnlightenment extends Suite {
 
   override def nestedSuites = List(new AboutAsserts,
     new AboutValAndVar,
+    new AboutLiterals,
     new AboutConstructors,
     new AboutTuples,
     new AboutLists,
