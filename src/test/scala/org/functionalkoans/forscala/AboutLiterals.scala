@@ -26,7 +26,7 @@ class AboutLiterals extends KoanSuite with ShouldMatchers {
   }
 
   koan("""Long Literals are 64 bit, are specified by appending an L or l at the end;
-         |l is rarely used since it looks like a 1""") {
+         |   l is rarely used since it looks like a 1""") {
     val a = 2L
     val b = 31L
     val c = 0x30FL
@@ -49,10 +49,10 @@ class AboutLiterals extends KoanSuite with ShouldMatchers {
   }
 
   koan("""Float and Double Literals are IEEE 754 for specific,
-         |Float are 32-bit length, Doubles are 64-bit.
-         |Floats can be coerced using a f or F suffix, and
-         |Doubles can be coerced using a d or D suffix.
-         |Exponent are specified using e or E.""") {
+         |   Float are 32-bit length, Doubles are 64-bit.
+         |   Floats can be coerced using a f or F suffix, and
+         |   Doubles can be coerced using a d or D suffix.
+         |   Exponent are specified using e or E.""") {
 
     val a = 3.0
     val b = 3.00
@@ -77,7 +77,7 @@ class AboutLiterals extends KoanSuite with ShouldMatchers {
 
 
   koan("""Trick: To get a string representation of the
-          | float or double literal add a space after the literal""") {
+          |   float or double literal add a space after the literal""") {
     3.0.toString should be("3.0")
     3.toString should be("3")
     (3. toString) should be("3.0")
@@ -88,7 +88,51 @@ class AboutLiterals extends KoanSuite with ShouldMatchers {
   koan("""Boolean literals are either true or false, using the true or false keyword""") {
     val a = true
     val b = false
-    a should be (true)
-    b should be (false)
+    a should be(true)
+    b should be(false)
+  }
+
+  koan("""Character Literals can either be an a single character,
+          |   an escape sequence, a Unicode octal up to 255 or a hexadecimal""") {
+    val a = 'a'
+    val b = 'B'
+    val c = '\u0061' //unicode for a
+    val d = '\141' //octal for a
+    val e = '\"'
+    val f = '\\'
+
+    //format(a) is a string format, meaning the "%c".format(x)
+    //will return the string representation of the char.
+
+    "%c".format(a) should be("a")
+    "%c".format(b) should be("B")
+    "%c".format(c) should be("a")
+    "%c".format(d) should be("a")
+    "%c".format(e) should be("\"")
+    "%c".format(f) should be("\\")
+  }
+
+  koan("""One-Line String Literals are surrounded by quotation marks.""") {
+    val a = "To be or not to be"
+    a should be("To be or not to be")
+  }
+
+  koan("""String Literals can contain escape sequences.""") {
+    val a = "An \141pple \141 d\141y keeps the doctor \141w\141y"
+    a should be("An apple a day keeps the doctor away")
+  }
+
+  koan("""Multiline String literals are surrounded by three quotation marks""") {
+    val a = """An apple a day
+    keeps the doctor away"""
+    a.split('\n').size should be(2)  //a.split('\n').size determines the number of lines
+  }
+
+  koan("""Multiline String literals on subsequent lines can have | to specify where
+          |   the start of the line is""") {
+    val a = """An apple a day
+               |keeps the doctor away"""
+    a.stripMargin.split('\n')(1).charAt(0) should be ('k')  //a.stripMargin.split('\n')(1).charAt(0)
+                                                            //gets the first characater on the 2nd line
   }
 }
