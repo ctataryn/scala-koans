@@ -58,5 +58,5 @@ trait KoanSuite extends FunSuite {
         }
     }
 
-    def koan(name : String)(fun: => Unit) = test(name)(fun)
+    def koan(name : String)(fun: => Unit) = test(name.stripMargin)(fun)
 }
