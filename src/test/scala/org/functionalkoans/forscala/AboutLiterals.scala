@@ -133,6 +133,6 @@ class AboutLiterals extends KoanSuite with ShouldMatchers {
     val a = """An apple a day
                |keeps the doctor away"""
     a.stripMargin.split('\n')(1).charAt(0) should be ('k')  //a.stripMargin.split('\n')(1).charAt(0)
-                                                            //gets the first characater on the 2nd line
+                                                            //gets the first character on the 2nd line
   }
 }
