@@ -19,6 +19,7 @@ class PathToEnlightenment extends Suite {
     new AboutMutableMaps,
     new AboutMutableSets,
     new AboutPatternMatching,
+    new AboutPartiallyAppliedFunctions,
     new AboutCaseClasses,
     new AboutOptions,
     new AboutSequencesAndArrays,
