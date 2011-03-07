@@ -33,8 +33,8 @@ class PathToEnlightenment extends Suite {
     new AboutImportsAndPackages,
     new AboutPreconditions,
     new AboutHigherOrderFunctions,
-    new AboutUniformAccessPrinciple
-
+    new AboutUniformAccessPrinciple,
+    new AboutManifests
   )
 
 
