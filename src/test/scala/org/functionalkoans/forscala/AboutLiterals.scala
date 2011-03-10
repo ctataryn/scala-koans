@@ -128,8 +128,8 @@ class AboutLiterals extends KoanSuite with ShouldMatchers {
     a.split('\n').size should be(2)  //a.split('\n').size determines the number of lines
   }
 
-  koan("""Multiline String literals on subsequent lines can have | to specify where
-          |   the start of the line is""") {
+  koan("""Multiline String literals on subsequent lines can have | to specify
+          |   the start of the line, then use stripMargin to display it correctly""") {
     val a = """An apple a day
                |keeps the doctor away"""
     a.stripMargin.split('\n')(1).charAt(0) should be ('k')  //a.stripMargin.split('\n')(1).charAt(0)
