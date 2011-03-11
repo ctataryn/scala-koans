@@ -61,13 +61,39 @@ class AboutImplicits extends KoanSuite with ShouldMatchers {
           |   long as an implicit value is set with in the scope.  These are
           |   called implicit function parameters""") {
 
-    def howMuchCanIMake_?(hours:Int)(implicit dollarsPerHour:BigDecimal) = dollarsPerHour * hours
+    def howMuchCanIMake_?(hours: Int)(implicit dollarsPerHour: BigDecimal) = dollarsPerHour * hours
 
     implicit var hourlyRate = BigDecimal(34.00)
-    howMuchCanIMake_?(30) should be (1020.00)
+    howMuchCanIMake_?(30) should be(1020.00)
 
     hourlyRate = BigDecimal(95.00)
-    howMuchCanIMake_?(95) should be (9025.00)
+    howMuchCanIMake_?(95) should be(9025.00)
+  }
+
+
+  koan("""Implicit Function Parameters can contain a list of implicits""") {
+
+    def howMuchCanIMake_?(hours: Int)(implicit amount: BigDecimal, currencyName: String) =
+      (amount * hours).toString() + " " + currencyName
+
+    implicit var hourlyRate = BigDecimal(34.00)
+    implicit val currencyName = "Dollars"
+
+    howMuchCanIMake_?(30) should be("1020.0 Dollars")
+
+    hourlyRate = BigDecimal(95.00)
+    howMuchCanIMake_?(95) should be("9025.0 Dollars")
+  }
+
+
+  koan("""Default arguments though are preferred to Implicit Function Parameters""") {
+
+    def howMuchCanIMake_?(hours: Int, amount: BigDecimal = 34, currencyName: String = "Dollars") =
+      (amount * hours).toString() + " " + currencyName
+
+    howMuchCanIMake_?(30) should be("1020 Dollars")
+
+    howMuchCanIMake_?(95,95) should be("9025 Dollars")
   }
 
 
