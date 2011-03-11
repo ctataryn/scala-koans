@@ -34,6 +34,7 @@ class PathToEnlightenment extends Suite {
     new AboutPreconditions,
     new AboutHigherOrderFunctions,
     new AboutUniformAccessPrinciple,
+    new AboutImplicits,
     new AboutManifests
   )
 
