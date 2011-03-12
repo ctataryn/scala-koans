@@ -70,7 +70,6 @@ class AboutImplicits extends KoanSuite with ShouldMatchers {
     howMuchCanIMake_?(95) should be(9025.00)
   }
 
-
   koan("""Implicit Function Parameters can contain a list of implicits""") {
 
     def howMuchCanIMake_?(hours: Int)(implicit amount: BigDecimal, currencyName: String) =
@@ -85,7 +84,6 @@ class AboutImplicits extends KoanSuite with ShouldMatchers {
     howMuchCanIMake_?(95) should be("9025.0 Dollars")
   }
 
-
   koan("""Default arguments though are preferred to Implicit Function Parameters""") {
 
     def howMuchCanIMake_?(hours: Int, amount: BigDecimal = 34, currencyName: String = "Dollars") =
@@ -93,9 +91,6 @@ class AboutImplicits extends KoanSuite with ShouldMatchers {
 
     howMuchCanIMake_?(30) should be("1020 Dollars")
 
-    howMuchCanIMake_?(95,95) should be("9025 Dollars")
+    howMuchCanIMake_?(95, 95) should be("9025 Dollars")
   }
-
-
-  //I believe these views are used in collections
 }
