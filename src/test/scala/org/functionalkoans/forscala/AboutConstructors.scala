@@ -1,7 +1,6 @@
 package org.functionalkoans.forscala
 
 import org.scalatest.matchers.ShouldMatchers
-import support.BlankValues.__
 import support.KoanSuite
 
 class AboutConstructors extends KoanSuite with ShouldMatchers {
@@ -26,8 +25,6 @@ class AboutConstructors extends KoanSuite with ShouldMatchers {
   koan("val in class definition defines read only property") {
     val aboutMe = new AboutConstructorWithValParameter("MyName")
     aboutMe.name should be("MyName")
-
-
   }
 
   koan("var in class definition defines read/write parameters") {
@@ -45,12 +42,10 @@ class AboutConstructors extends KoanSuite with ShouldMatchers {
 
   koan("Primary constructor specified with a parameter requires that parameter to be passed in") {
     // val aboutMe = new AboutConstructorWithValParameter()
-
   }
 
   koan("Class with no class parameters is called with no arguments") {
     // add parameter to make this fail
     val aboutMe = new AboutClassWithNoClassParameter
-
   }
 }
