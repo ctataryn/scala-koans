@@ -10,7 +10,7 @@ class AboutTypeSignatures extends KoanSuite with ShouldMatchers {
 
   koan("Most of the time, Scala will infer the type and [] are optional") {
     val z = "Do" :: "Re" :: "Mi" :: "Fa" :: "So" :: "La" :: "Te" :: "Do" ::
-      Nil //Infers that the list assigned to variable is of type List[String]
+            Nil //Infers that the list assigned to variable is of type List[String]
   }
 
   koan("A trait can be declared containing a type, where a concrete implmenter will satisfy the type") {
@@ -74,8 +74,8 @@ class AboutTypeSignatures extends KoanSuite with ShouldMatchers {
     val intRand2 = rand.asInstanceOf[IntRandomizer]
   }
 
-  koan("asInstanceOf[className] will throw a ClassCastException if a class derived from " +
-    "and the class target aren't from the same inheritance branch") {
+  koan("""asInstanceOf[className] will throw a ClassCastException if a class derived from
+         |   and the class target aren't from the same inheritance branch""") {
     trait Randomizer[A] {
       def draw(): A
     }
@@ -100,7 +100,40 @@ class AboutTypeSignatures extends KoanSuite with ShouldMatchers {
     null.asInstanceOf[Short] should be(0)
   }
 
-  koan("abstract override is used as a modifier that requires that a concrete class ") {}
+
+  /* TODO: This probably needs to move to another category,
+     TODO: since this class is supposed to be about type signatures  */
+  koan("""Classes can be abstract. Abstract classes can define some methods
+         |   concretely or may rely on it\'s subclasses to implement.
+         |   If a method has no body and is in
+         |   an abstract class, the method is considered abstract.""") {
+    abstract class Parent {
+      def add(x: Int): Int   //this is considered abstract
+    }
+
+    class Child extends Parent {
+      def add(x: Int): Int = x + 3
+    }
+
+    new Child().add(3) should be(6)
+  }
+
+  /* TODO:  This probably needs to move to another category,
+     TODO:  since this class is supposed to be about type signatures  */
+  koan("""Same koan as above. Except that concrete methods
+         |   can have the modifier override to designate that it overrides a parent class.""") {
+    abstract class Parent {
+      def add(x: Int): Int   //this is considered abstract
+    }
+
+    class Child extends Parent {
+      override def add(x: Int): Int = x + 3  //explicitly
+    }
+
+    new Child().add(3) should be(6)
+  }
+
+  koan("abstract override is used as a modifier that requires that a concrete class ") {} //TODO: Need Example
 
   koan("() => Unit is a type, and so is => Unit, and so is Int, Int => Int") {} //TODO:Verify I got that right
 
