@@ -4,7 +4,7 @@ import org.scalatest.matchers.ShouldMatchers
 import support.KoanSuite
 
 class AboutTraits extends KoanSuite with ShouldMatchers {
-  koan("A class uses the \'extends\' keyword to mixin a trait if it is the only relationship the class inherits") {
+  koan("A class can use the \'extends\' keyword to mixin a trait if it is the only relationship the class inherits") {
     case class Event(name: String, source: Any)
 
     trait EventListener {
@@ -25,7 +25,8 @@ class AboutTraits extends KoanSuite with ShouldMatchers {
     myListener.listen(evt)
   }
 
-  koan("A class can only extend from _one_ class or trait, any subsequent extension should use the keyword \'with\'") {
+  koan("""A class can only \'extends\' from _one_ class or trait, any subsequent extension
+          |  should use the keyword \'with\'""") {
 
     case class Event(name: String, source: Any)
 
