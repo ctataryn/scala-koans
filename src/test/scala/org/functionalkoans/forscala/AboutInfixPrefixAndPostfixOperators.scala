@@ -44,7 +44,10 @@ class AboutInfixPrefixAndPostfixOperators extends KoanSuite with ShouldMatchers 
     (-31) should be(-31)
   }
 
-  koan("""Here we create our own prefix operator for our own class.""") {
+  koan("""Here we create our own prefix operator for our own class.
+          |   The only identifiers that can be used as prefix operators
+          |   are +, -, !, and ~""") {
+
     class Stereo {
       def unary_+ = "on"
       def unary_- = "off"
