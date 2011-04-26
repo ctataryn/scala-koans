@@ -5,6 +5,8 @@ import org.scalatest.matchers.ShouldMatchers
 
 class AboutPatternMatching extends KoanSuite with ShouldMatchers {
 
+  //TODO:Lists
+  //TODO:Guards
 
   koan("Pattern matching returns something") {
 
