@@ -6,8 +6,6 @@ import org.junit.runner.RunWith
 
 @RunWith(classOf[JUnitRunner])
 class PathToEnlightenment extends Suite {
-
-
   override def nestedSuites = List(new AboutAsserts,
     new AboutValAndVar,
     new AboutLiterals,
@@ -16,15 +14,17 @@ class PathToEnlightenment extends Suite {
     new AboutLists,
     new AboutMaps,
     new AboutSets,
+    new AboutSequencesAndArrays,
     new AboutMutableMaps,
     new AboutMutableSets,
-    new AboutPatternMatching,
-    new AboutPartiallyAppliedFunctions,
-    new AboutCaseClasses,
     new AboutOptions,
-    new AboutSequencesAndArrays,
+    new AboutPatternMatching,
+    new AboutCaseClasses,
+    new AboutPartiallyAppliedFunctions,
+    new AboutPartialFunctions,
     new AboutNamedAndDefaultArguments,
     new AboutForExpressions,
+    new AboutEnumerations,
     new AboutEmptyValues,
     new AboutParentClasses,
     new AboutAccessModifiers,
@@ -37,6 +37,4 @@ class PathToEnlightenment extends Suite {
     new AboutImplicits,
     new AboutManifests
   )
-
-
 }
