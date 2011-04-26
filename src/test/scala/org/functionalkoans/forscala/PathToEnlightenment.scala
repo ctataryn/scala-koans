@@ -28,7 +28,7 @@ class PathToEnlightenment extends Suite {
     new AboutEmptyValues,
     new AboutParentClasses,
     new AboutNamedAndDefaultArguments,
-    new AboutInfixAndPostfixOperators,
+    new AboutInfixPrefixAndPostfixOperators,
     new AboutInfixTypes,
     new AboutAccessModifiers,
     new AboutTypeSignatures,
