@@ -268,7 +268,7 @@ class AboutTraits extends KoanSuite with ShouldMatchers {
        }
      }
 
-     case class Baker  //define a class
+     case class Baker()  //define a class
      val baker = new Baker with ListLog with UserLog with TimedLog  //Pick and choose what traits to stack!
      baker.log("baked cake")
      baker.logCache(0) should be ("Root said: January, 12, 2025 : baked cake") //Whoa!
