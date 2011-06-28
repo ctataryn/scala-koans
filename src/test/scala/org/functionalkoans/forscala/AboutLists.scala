@@ -123,12 +123,11 @@ class AboutLists extends KoanSuite with ShouldMatchers {
     c.tail should be(List())
   }
 
-
   koan("Lists can have views which allow you to efficiently do compound work") {
     val lst = List(1, 2, 3)
     var history = List[String]()
 
-    def addHistory(s: String) = {
+    def addHistory(s: String) {
       history = history :+ s
     }
 
