@@ -36,5 +36,16 @@ reflection
 scala properties - set date / use earlier date
 
 
+Make sure this is covered:
+scala> def pointit() = 123
+pointit: ()Int
+
+scala> () => pointit()
+res2: () => Int = <function0>
+
+scala> res2.apply
+res4: Int = 123
+
+
 
                     

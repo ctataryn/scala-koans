@@ -38,8 +38,6 @@ class AboutPatternMatching extends KoanSuite with ShouldMatchers {
   }
 
   koan("Pattern matching can match complex expressions") {
-
-
     def goldilocks(expr: Any) = expr match {
       case ("porridge", "Papa") => "Papa eating porridge"
       case ("porridge", "Mama") => "Mama eating porridge"
@@ -48,11 +46,9 @@ class AboutPatternMatching extends KoanSuite with ShouldMatchers {
     }
 
     goldilocks(("porridge", "Mama")) should be("Mama eating porridge")
-
   }
 
   koan("Pattern matching can wildcard parts of expressions") {
-
     def goldilocks(expr: Any) = expr match {
       case ("porridge", _) => "eating"
       case ("chair", "Mama") => "sitting"
@@ -62,10 +58,9 @@ class AboutPatternMatching extends KoanSuite with ShouldMatchers {
 
     goldilocks(("porridge", "Papa")) should be("eating")
     goldilocks(("chair", "Mama")) should be("sitting")
-
   }
-  koan("Pattern matching can substitute parts of expressions") {
 
+  koan("Pattern matching can substitute parts of expressions") {
     def goldilocks(expr: Any) = expr match {
       case ("porridge", bear) => bear + " said someone's been eating my porridge"
       case ("chair", bear) => bear + " said someone's been sitting in my chair"
@@ -91,5 +86,33 @@ class AboutPatternMatching extends KoanSuite with ShouldMatchers {
 
     goldilocks("Eating Alert: bear=Papa, source=porridge") should be("Papa said someone's been eating my porridge")
     goldilocks("Sitting Alert: bear=Mama, source=chair") should be("Mama said someone's been sitting on my chair")
+  }
+
+  koan("""A backquote can be used to refer to a stable variable in scope to create a case statement.
+         | This prevents what is called \'Variable Shadowing\'""") {
+    val foodItem = "porridge"
+
+    def goldilocks(expr: Any) = expr match {
+      case (`foodItem`, _) => "eating"
+      case ("chair", "Mama") => "sitting"
+      case ("bed", "Baby") => "sleeping"
+      case _ => "what?"
+    }
+
+    goldilocks(("porridge", "Papa")) should be("eating")
+    goldilocks(("chair", "Mama")) should be("sitting")
+    goldilocks(("porridge", "Cousin")) should be("eating")
+    goldilocks(("beer", "Cousin")) should be("what?")
+  }
+
+  koan("A backquote can be used to refer to a method parameter as a stable variable to create a case statement.") {
+
+    def patternEquals(i:Int, j:Int) = j match {
+      case `i` => true
+      case _ => false
+    }
+    patternEquals(3,3) should be (true)
+    patternEquals(7,9) should be (false)
+    patternEquals(9,9) should be (true)
   }
 }
