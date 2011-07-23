@@ -95,14 +95,10 @@ class AboutMaps extends KoanSuite with ShouldMatchers {
 
     val myMap = Map("OH" -> "Ohio", "WI" -> "Wisconsin", "IA" -> "Iowa")
 
-
     intercept[NoSuchElementException] {
-
       myMap("MI") should be("Michigan")
     }
   }
-
-
 
   koan("Map elements can be removed in multiple") {
     val myMap = Map("MI" -> "Michigan", "OH" -> "Ohio", "WI" -> "Wisconsin", "IA" -> "Iowa")
@@ -132,9 +128,6 @@ class AboutMaps extends KoanSuite with ShouldMatchers {
     aNewMap.equals(myMap) should be(true)
   }
 
-
-
-
   koan("Map equivalency is independent of order") {
 
     val myMap1 = Map("MI" -> "Michigan", "OH" -> "Ohio", "WI" -> "Wisconsin", "IA" -> "Iowa")
@@ -143,6 +136,4 @@ class AboutMaps extends KoanSuite with ShouldMatchers {
 
     myMap1.equals(myMap2) should be(true)
   }
-
-
 }
