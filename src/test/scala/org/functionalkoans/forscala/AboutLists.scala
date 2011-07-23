@@ -127,15 +127,9 @@ class AboutLists extends KoanSuite with ShouldMatchers {
     val lst = List(1, 2, 3)
     var history = List[String]()
 
-    def addHistory(s: String) {
-      history = history :+ s
-    }
+    def addHistory(s: String) { history = history :+ s }
 
-    lst.map {
-      x => addHistory("Doubling %s".format(x)); x * 2
-    }.map {
-      x => addHistory("Adding 1 to %s".format(x)); x + 1
-    }
+    lst.map {x => addHistory("Doubling %s".format(x)); x * 2}.map {x => addHistory("Adding 1 to %s".format(x)); x + 1}
 
     history(0) should be("Doubling 1")
     history(1) should be("Doubling 2")
@@ -145,11 +139,8 @@ class AboutLists extends KoanSuite with ShouldMatchers {
     history(5) should be("Adding 1 to 6")
 
     history = List[String]()
-    lst.view.map {
-      x => addHistory("Doubling %s".format(x)); x * 2
-    }.map {
-      x => addHistory("Adding 1 to %s".format(x)); x + 1
-    }.force
+
+    lst.view.map {x => addHistory("Doubling %s".format(x)); x * 2}.map { x => addHistory("Adding 1 to %s".format(x)); x + 1}.force
 
     history(0) should be("Doubling 1")
     history(1) should be("Adding 1 to 2")
@@ -158,5 +149,4 @@ class AboutLists extends KoanSuite with ShouldMatchers {
     history(4) should be("Doubling 3")
     history(5) should be("Adding 1 to 6")
   }
-
 }
