@@ -47,4 +47,6 @@ class AboutInfixTypes extends KoanSuite with ShouldMatchers {
 
      announceCouple(romeo loves juliet) should be ("Romeo is in love with Juliet")
    }
+
+
 }
