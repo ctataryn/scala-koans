@@ -4,7 +4,6 @@ import org.scalatest.matchers.ShouldMatchers
 import support.KoanSuite
 
 class AboutValAndVar extends KoanSuite with ShouldMatchers {
-          //vars
   koan("vars may be reassigned") {
     var a = 5
     a should be(5)
