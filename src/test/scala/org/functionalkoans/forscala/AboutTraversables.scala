@@ -2,6 +2,7 @@ package org.functionalkoans.forscala
 
 import org.scalatest.matchers.ShouldMatchers
 import support.KoanSuite
+import collection.immutable.TreeSet
 
 class AboutTraversables extends KoanSuite with ShouldMatchers {
 
@@ -40,7 +41,7 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
   koan("""flatMap of Options will filter out all Nones and Keep the Somes""") {
     val list = List(1, 2, 3, 4, 5)
     val result = list.flatMap(it => if (it % 2 == 0) Some(it) else None)
-    result should be (List(2, 4))
+    result should be(List(2, 4))
   }
 
   koan("""collect will apply a partial function to all elements of a Traversable
@@ -49,7 +50,7 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
     val result = list.collect {
       case x: Int if (x % 2 == 0) => x * 3
     }
-    result should be (List(12, 18, 24, 42))
+    result should be(List(12, 18, 24, 42))
   }
 
   koan("""collect will apply a partial function to all elements of a Traversable
@@ -73,4 +74,51 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
     list.foreach(num => println(num * 4))
     list should be(List(4, 6, 7, 8, 9, 13, 14))
   }
+
+  koan("""toArray will convert any Traversable to an Array, which is a special wrapper around a
+          |  primitive Java array.""") {
+    val set = Set(4, 6, 7, 8, 9, 13, 14)
+    val result = set.toArray
+    result.isInstanceOf[Array[Int]] should be(true)
+  }
+
+  koan("""toList will convert any Traversable to a List.""") {
+    val set = Set(4, 6, 7, 8, 9, 13, 14)
+    val result = set.toList
+    result.isInstanceOf[List[Int]] should be(true)
+  }
+
+  koan("""toList, as well as other conversion methods like toSet, toArray,
+          |  will not convert if the collection type is the same.""") {
+    val list = List(5, 6, 7, 8, 9)
+    val result = list.toList
+    (result eq list) should be(true) //Reminder: eq tests for reference equality
+  }
+
+  koan("""toIterable will convert any Traversable to an Iterable. This is a base
+          |  trait for all Scala collections that define an iterator method to step
+          |  through one-by-one the collection's elements.
+          |  (see AboutIterable koan).""") {
+
+    val set = Set(4, 6, 7, 8, 9, 13, 14)
+    val result = set.toIterable
+    result.isInstanceOf[Iterable[Int]] should be(true)
+  }
+
+  koan("""toSeq will convert any Traversable to a Seq which is an ordered Iterable
+          |  and is the superclass to List, Queues, and Vectors.  Sequences provide
+          |  a method apply for indexing. Indices range from 0 up the the
+          |  length of a sequence.""") {
+    val set = Set(4, 6, 7, 8, 9, 13, 14)
+    val result = set.toSeq
+    result.isInstanceOf[Seq[Int]] should be(true)
+  }
+
+  koan("""toIndexedSeq will convert any Traversable to an IndexedSeq which is an indexed sequence used in
+          | Vectors and Strings""") {
+    val set = Set(4, 6, 7, 8, 9, 13, 14)
+    val result = set.toIndexedSeq
+    result.isInstanceOf[IndexedSeq[Int]] should be(true)
+  }
+
 }
