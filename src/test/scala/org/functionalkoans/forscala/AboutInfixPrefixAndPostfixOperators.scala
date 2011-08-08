@@ -50,12 +50,13 @@ class AboutInfixPrefixAndPostfixOperators extends KoanSuite with ShouldMatchers 
 
     class Stereo {
       def unary_+ = "on"
+
       def unary_- = "off"
     }
 
     val stereo = new Stereo
-    (+stereo) should be ("on")
-    (-stereo) should be ("off")
+    (+stereo) should be("on")
+    (-stereo) should be("off")
   }
 
 }

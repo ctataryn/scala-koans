@@ -30,23 +30,26 @@ class AboutTypeProjections extends KoanSuite with ShouldMatchers {
     class AppleBasket extends X {
       type Y = Apple
     }
-    classOf[TangeloBasket#Y].getSimpleName should be ("Tangelo")
-    classOf[AppleBasket#Y].getSimpleName should be ("Apple")
+    classOf[TangeloBasket#Y].getSimpleName should be("Tangelo")
+    classOf[AppleBasket#Y].getSimpleName should be("Apple")
   }
 
   koan("In generic form4") {
     trait X {
       type Y <: Fruit
+
       def whatsFeedingMe: String
     }
 
     val x = new X {
       type Y = Tangelo
+
       override def whatsFeedingMe = classOf[Y].getSimpleName
     }
 
     val z = new X {
       type Y = Orange
+
       override def whatsFeedingMe = classOf[Y].getSimpleName
     }
 

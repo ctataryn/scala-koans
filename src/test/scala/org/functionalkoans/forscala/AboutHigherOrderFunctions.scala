@@ -3,7 +3,6 @@ package org.functionalkoans.forscala
 import support.KoanSuite
 import support.BlankValues._
 import org.scalatest.matchers.ShouldMatchers
-import javax.xml.soap.Name
 import collection.immutable.List
 
 class AboutHigherOrderFunctions extends KoanSuite with ShouldMatchers {
@@ -62,8 +61,8 @@ class AboutHigherOrderFunctions extends KoanSuite with ShouldMatchers {
       }
     }
 
-    addWithoutSyntaxSugar(1)(2) should be (3)
-    
+    addWithoutSyntaxSugar(1)(2) should be(3)
+
     def add(x: Int) = (y: Int) => x + y
     add(2)(3) should be(5)
 
@@ -73,7 +72,9 @@ class AboutHigherOrderFunctions extends KoanSuite with ShouldMatchers {
 
 
   koan("function taking another function as parameter. Helps in compositioning functions") {
-    def makeUpper(xs: List[String]) = xs map {_.toUpperCase}
+    def makeUpper(xs: List[String]) = xs map {
+      _.toUpperCase
+    }
     def makeWhatEverYouLike(xs: List[String], sideEffect: String => String) = {
       xs map sideEffect
     }
@@ -123,6 +124,6 @@ class AboutHigherOrderFunctions extends KoanSuite with ShouldMatchers {
     val enchantress = new PokerTable("Enchantress", 15, Nil)
 
     val x = theTexas.isAvailable _
-    List(12,2,3,4,5,6,11,44).filter(x)
+    List(12, 2, 3, 4, 5, 6, 11, 44).filter(x)
   }
 }

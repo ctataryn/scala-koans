@@ -242,37 +242,37 @@ class AboutTraits extends KoanSuite with ShouldMatchers {
   koan("""Traits can be stacked with other traits to create customizable decorative
           |   abstractions for a class that weren't written in originally!""") {
 
-     trait Log {
-       //A log
-       def log(value: String)
-     }
+    trait Log {
+      //A log
+      def log(value: String)
+    }
 
-     trait TimedLog extends Log {
-       abstract override def log(value: String) {
-         super.log("January, 12, 2025 : " + value)
-       }
-     }
+    trait TimedLog extends Log {
+      abstract override def log(value: String) {
+        super.log("January, 12, 2025 : " + value)
+      }
+    }
 
-     trait UserLog extends Log {
-       abstract override def log(value: String) {
-         super.log("Root said: " + value)
-       }
-     }
+    trait UserLog extends Log {
+      abstract override def log(value: String) {
+        super.log("Root said: " + value)
+      }
+    }
 
-     trait ListLog extends Log {
-       var logCache = List[String]()
+    trait ListLog extends Log {
+      var logCache = List[String]()
 
-       override def log(value: String) {
-         logCache = logCache :+ value
-         println(value)
-       }
-     }
+      override def log(value: String) {
+        logCache = logCache :+ value
+        println(value)
+      }
+    }
 
-     case class Baker()  //define a class
-     val baker = new Baker with ListLog with UserLog with TimedLog  //Pick and choose what traits to stack!
-     baker.log("baked cake")
-     baker.logCache(0) should be ("Root said: January, 12, 2025 : baked cake") //Whoa!
-   }
+    case class Baker() //define a class
+    val baker = new Baker with ListLog with UserLog with TimedLog //Pick and choose what traits to stack!
+    baker.log("baked cake")
+    baker.logCache(0) should be("Root said: January, 12, 2025 : baked cake") //Whoa!
+  }
 
 
   koan("Traits are instantiated before a classes instantition") {

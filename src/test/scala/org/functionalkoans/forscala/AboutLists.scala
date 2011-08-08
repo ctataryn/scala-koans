@@ -9,7 +9,7 @@ class AboutLists extends KoanSuite with ShouldMatchers {
     val a: List[String] = Nil
     val b: List[Int] = Nil
 
-    (a == Nil) should be(true) 
+    (a == Nil) should be(true)
     (a eq Nil) should be(true)
 
     (b == Nil) should be(true)
@@ -23,7 +23,7 @@ class AboutLists extends KoanSuite with ShouldMatchers {
     val a = List(1, 2, 3)
     a should equal(List(1, 2, 3))
   }
-  
+
   koan("Lists can be accessed via head and tail") {
     val a = List(1, 2, 3)
     a.head should equal(1)
@@ -53,7 +53,7 @@ class AboutLists extends KoanSuite with ShouldMatchers {
 
     // get the length of the list
     a.length should equal(5)
-    
+
     // reverse the list
     a.reverse should equal(List(9, 7, 5, 3, 1))
 
@@ -73,8 +73,12 @@ class AboutLists extends KoanSuite with ShouldMatchers {
 
   koan("Functions over lists can use _ as shorthand") {
     val a = List(1, 2, 3)
-    a.map { _ * 2 } should equal (List(2, 4, 6))
-    a.filter { _ % 2 == 0 } should equal (List(2))
+    a.map {
+      _ * 2
+    } should equal(List(2, 4, 6))
+    a.filter {
+      _ % 2 == 0
+    } should equal(List(2))
   }
 
   koan("Functions over lists can use () instead of {}") {
@@ -122,9 +126,15 @@ class AboutLists extends KoanSuite with ShouldMatchers {
     val lst = List(1, 2, 3)
     var history = List[String]()
 
-    def addHistory(s: String) { history = history :+ s }
+    def addHistory(s: String) {
+      history = history :+ s
+    }
 
-    lst.map {x => addHistory("Doubling %s".format(x)); x * 2}.map {x => addHistory("Adding 1 to %s".format(x)); x + 1}
+    lst.map {
+      x => addHistory("Doubling %s".format(x)); x * 2
+    }.map {
+      x => addHistory("Adding 1 to %s".format(x)); x + 1
+    }
 
     history(0) should be("Doubling 1")
     history(1) should be("Doubling 2")
@@ -135,7 +145,11 @@ class AboutLists extends KoanSuite with ShouldMatchers {
 
     history = List[String]()
 
-    lst.view.map {x => addHistory("Doubling %s".format(x)); x * 2}.map { x => addHistory("Adding 1 to %s".format(x)); x + 1}.force
+    lst.view.map {
+      x => addHistory("Doubling %s".format(x)); x * 2
+    }.map {
+      x => addHistory("Adding 1 to %s".format(x)); x + 1
+    }.force
 
     history(0) should be("Doubling 1")
     history(1) should be("Adding 1 to 2")

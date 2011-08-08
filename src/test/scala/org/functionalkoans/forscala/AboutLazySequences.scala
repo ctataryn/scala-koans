@@ -15,7 +15,8 @@ class AboutLazySequences extends KoanSuite with ShouldMatchers {
   koan("Strict collection always processes it elements but lazy collection does on demand") {
     var x = 0
     def inc = {
-      x += 1; x
+      x += 1;
+      x
     }
     var strictList = List(inc _, inc _, inc _)
     strictList.map(f => f()).head should be(1)

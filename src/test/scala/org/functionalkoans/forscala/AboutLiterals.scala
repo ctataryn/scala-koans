@@ -80,7 +80,7 @@ class AboutLiterals extends KoanSuite with ShouldMatchers {
           |   float or double literal add a space after the literal""") {
     3.0.toString should be("3.0")
     3.toString should be("3")
-    (3. toString) should be("3.0")
+    (3.toString) should be("3.0")
     (3.0 toString) should be("3.0")
     3d.toString should be("3.0")
   }
@@ -125,14 +125,14 @@ class AboutLiterals extends KoanSuite with ShouldMatchers {
   koan("""Multiline String literals are surrounded by three quotation marks""") {
     val a = """An apple a day
     keeps the doctor away"""
-    a.split('\n').size should be(2)  //a.split('\n').size determines the number of lines
+    a.split('\n').size should be(2) //a.split('\n').size determines the number of lines
   }
 
   koan("""Multiline String literals on subsequent lines can have | to specify
           |   the start of the line, then use stripMargin to display it correctly""") {
     val a = """An apple a day
                |keeps the doctor away"""
-    a.stripMargin.split('\n')(1).charAt(0) should be ('k')  //a.stripMargin.split('\n')(1).charAt(0)
-                                                            //gets the first character on the 2nd line
+    a.stripMargin.split('\n')(1).charAt(0) should be('k') //a.stripMargin.split('\n')(1).charAt(0)
+    //gets the first character on the 2nd line
   }
 }

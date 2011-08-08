@@ -18,7 +18,7 @@ package subpackage {
 
 class AboutImportsAndPackagesInSubpackages extends KoanSuite with ShouldMatchers {
   koan("A package can be included in a file with an established established package, " +
-    "and can encapsulate it's contents with a {} block") {
+          "and can encapsulate it's contents with a {} block") {
     val luther = new Artist("Luther", "Vandross")
     luther.lastName should be("Vandross")
   }
