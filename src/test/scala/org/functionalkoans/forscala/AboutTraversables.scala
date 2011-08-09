@@ -114,11 +114,44 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
     result.isInstanceOf[Seq[Int]] should be(true)
   }
 
-  koan("""toIndexedSeq will convert any Traversable to an IndexedSeq which is an indexed sequence used in
-          | Vectors and Strings""") {
+  koan("""toIndexedSeq will convert any Traversable to an IndexedSeq which is
+          |  an indexed sequence used in
+          |  Vectors and Strings""") {
     val set = Set(4, 6, 7, 8, 9, 13, 14)
     val result = set.toIndexedSeq
     result.isInstanceOf[IndexedSeq[Int]] should be(true)
   }
 
+  koan("""toStream will convert any Traversable to an Stream which is
+          |  which is a lazy lists where elements are evaluated as they
+          |  are needed.""") {
+    val list = List(4, 6, 7, 8, 9, 13, 14)
+    val result = list.toStream
+    result.isInstanceOf[Stream[Int]] should be(true)
+    (result take 3) should be(List(4, 6, 7))
+  }
+
+  koan("""toSet will convert any Traversable to an Set which is
+          |  which is a collection of unordered, unique values""") {
+    val list = List(4, 6, 7, 8, 9, 13, 14)
+    val result = list.toSet
+    result.isInstanceOf[Set[Int]] should be(true)
+  }
+
+  koan("""toMap will convert any Traversable to a Map.  How it's
+          | used, depends on the original collection, if it's a List or Seq,
+          | it should be of parameterized type Tuple2.""") {
+    val list = List(("Phoenix" -> "Arizona"), ("Austin" -> "Texas"))
+    val result = list.toMap
+    result.isInstanceOf[Map[String, String]] should be(true)
+  }
+
+  koan("""toMap will convert a Set to a Map,
+          | it should be of parameterized type Tuple2.""") {
+    val set = Set(("Phoenix" -> "Arizona"), ("Austin" -> "Texas"))
+    val result = set.toMap
+    result.isInstanceOf[Map[String, String]] should be(true)
+  }
+
+  //TODO:Transpose
 }
