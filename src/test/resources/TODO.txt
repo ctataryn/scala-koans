@@ -1,3 +1,7 @@
 type members
-apply methods
+apply/unapply methods
 equality
+case class inheritance
+objects?
+inner classes
+
