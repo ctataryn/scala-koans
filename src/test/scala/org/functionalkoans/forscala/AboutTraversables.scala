@@ -153,5 +153,76 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
     result.isInstanceOf[Map[String, String]] should be(true)
   }
 
+  koan("""isEmpty is pretty self evident""") {
+    val map = Map("Phoenix" -> "Arizona", "Austin" -> "Texas")
+    map.isEmpty should be(false)
+    
+    val set = Set()
+    set.isEmpty should be(true)
+  }
+
+  koan("""nonEmpty is pretty self evident too""") {
+    val map = Map("Phoenix" -> "Arizona", "Austin" -> "Texas")
+    map.nonEmpty should be(true)
+    
+    val set = Set()
+    set.nonEmpty should be(false)
+  }
+
+  koan("""size provides the size of the traversable""") {
+    val map = Map("Phoenix" -> "Arizona", "Austin" -> "Texas")
+    map.size should be(2) 
+  }
+
+  koan("""hasDefiniteSize will return true if there is traversable that has a 
+          finite end, otherwise false""") {
+    val map = Map("Phoenix" -> "Arizona", "Austin" -> "Texas")
+    map.hasDefiniteSize should be(true)
+
+    import Stream.cons
+    val stream = cons(0, cons(1, Stream.empty))
+    stream.hasDefiniteSize should be(false)
+  } 
+  
+  koan("""head will return the first element of an ordered collection, or some random
+          | element if order is not defined like in a Set or Map""") {
+    val list = List(10, 19, 45, 1, 22)
+    list.head should be (10)
+  }
+
+  koan("""headOption will return the first element as an Option of an order collection,
+          | or some random element if order is not defined.  If a first element 
+          | is not available, then None is returned""") {
+    val list = List(10, 19, 45, 1, 22)
+    list.headOption should be (Some(10))
+
+    val list2 = List()
+    list2.headOption should be (None)
+  }
+
+  koan("""last will return the last element of an ordered collection, or some random
+          | element if order is not defined like in a Set or Map""") {
+    val list = List(10, 19, 45, 1, 22)
+    list.last should be (22)
+  }
+    
+  koan("""lastOption will return the first element as an Option of an order collection,
+          | or some random element if order is not defined.  If a first element 
+          | is not available, then None is returned""") {
+    val list = List(10, 19, 45, 1, 22)
+    list.lastOption should be (Some(22))
+
+    val list2 = List()
+    list2.lastOption should be (None)
+  }
+
+  koan("""find will locate an the first item that matches a predicate p as Some or None if 
+    | an element is not found""") {
+    val list = List(10, 19, 45, 1, 22)
+    list.find(_ % 2 != 0) should be (Some(19))
+    
+    val list2 = List(4,8,16)
+    list2.find(_ % 2 != 0) should be (None)
+  }
   //TODO:Transpose
 }
