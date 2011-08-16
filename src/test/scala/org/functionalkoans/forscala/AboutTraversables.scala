@@ -2,6 +2,7 @@ package org.functionalkoans.forscala
 
 import org.scalatest.matchers.ShouldMatchers
 import support.KoanSuite
+import Stream._
 import collection.immutable.TreeSet
 
 class AboutTraversables extends KoanSuite with ShouldMatchers {
@@ -156,7 +157,7 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
   koan("""isEmpty is pretty self evident""") {
     val map = Map("Phoenix" -> "Arizona", "Austin" -> "Texas")
     map.isEmpty should be(false)
-    
+
     val set = Set()
     set.isEmpty should be(true)
   }
@@ -164,14 +165,14 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
   koan("""nonEmpty is pretty self evident too""") {
     val map = Map("Phoenix" -> "Arizona", "Austin" -> "Texas")
     map.nonEmpty should be(true)
-    
+
     val set = Set()
     set.nonEmpty should be(false)
   }
 
   koan("""size provides the size of the traversable""") {
     val map = Map("Phoenix" -> "Arizona", "Austin" -> "Texas")
-    map.size should be(2) 
+    map.size should be(2)
   }
 
   koan("""hasDefiniteSize will return true if there is traversable that has a 
@@ -182,47 +183,176 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
     import Stream.cons
     val stream = cons(0, cons(1, Stream.empty))
     stream.hasDefiniteSize should be(false)
-  } 
-  
+  }
+
   koan("""head will return the first element of an ordered collection, or some random
           | element if order is not defined like in a Set or Map""") {
     val list = List(10, 19, 45, 1, 22)
-    list.head should be (10)
+    list.head should be(10)
   }
 
   koan("""headOption will return the first element as an Option of an order collection,
           | or some random element if order is not defined.  If a first element 
           | is not available, then None is returned""") {
     val list = List(10, 19, 45, 1, 22)
-    list.headOption should be (Some(10))
+    list.headOption should be(Some(10))
 
     val list2 = List()
-    list2.headOption should be (None)
+    list2.headOption should be(None)
   }
 
   koan("""last will return the last element of an ordered collection, or some random
           | element if order is not defined like in a Set or Map""") {
     val list = List(10, 19, 45, 1, 22)
-    list.last should be (22)
+    list.last should be(22)
   }
-    
+
   koan("""lastOption will return the first element as an Option of an order collection,
           | or some random element if order is not defined.  If a first element 
           | is not available, then None is returned""") {
     val list = List(10, 19, 45, 1, 22)
-    list.lastOption should be (Some(22))
+    list.lastOption should be(Some(22))
 
     val list2 = List()
-    list2.lastOption should be (None)
+    list2.lastOption should be(None)
   }
 
   koan("""find will locate an the first item that matches a predicate p as Some or None if 
     | an element is not found""") {
     val list = List(10, 19, 45, 1, 22)
-    list.find(_ % 2 != 0) should be (Some(19))
-    
-    val list2 = List(4,8,16)
-    list2.find(_ % 2 != 0) should be (None)
+    list.find(_ % 2 != 0) should be(Some(19))
+
+    val list2 = List(4, 8, 16)
+    list2.find(_ % 2 != 0) should be(None)
   }
-  //TODO:Transpose
+
+  koan("""tail will return the rest of the collection without the head""") {
+    val list = List(10, 19, 45, 1, 22)
+    list.tail should be(List(19, 45, 1, 22))
+  }
+
+  koan("""init will return the rest of the collection without the last""") {
+    val list = List(10, 19, 45, 1, 22)
+    list.init should be(List(10, 19, 45, 1))
+  }
+
+  koan("""Given a `from` index, and a `to` index, slice will return the part of the
+          |  collection including `from`, and excluding `to`""") {
+    val list = List(10, 19, 45, 1, 22)
+    list.slice(1, 3) should be(List(19, 45))
+  }
+
+  koan("""Take will return the the first number of elements given.""") {
+    val list = List(10, 19, 45, 1, 22)
+    list.take(3) should be(List(10, 19, 45))
+  }
+
+  koan("""Take is used often with Streams, and Streams after all are Traversable""") {
+    def streamer(v: Int): Stream[Int] = cons(v, streamer(v + 1))
+    val a = streamer(2)
+    (a take 3 toList) should be(List(2, 3, 4))
+  }
+
+  koan("""Drop will take the rest of the Traversable except
+          |  the number of elements given""") {
+    def streamer(v: Int): Stream[Int] = cons(v, streamer(v + 1))
+    val a = streamer(2)
+    ((a drop 6) take 3).toList should be(List(8, 9, 10))
+  }
+
+  koan("""takeWhile will continually accumulate elements until a predicate
+          |  is no longer satisfied.  In this koan, TreeSet is Traversable.
+          |  TreeSet also is also sorted.""") {
+    val treeSet = TreeSet(87, 44, 5, 4, 200, 10, 39, 100)
+    treeSet.takeWhile(_ < 100) should be(TreeSet(4, 5, 10, 39, 44, 87))
+  }
+
+  koan("""dropWhile will continually drop elements until a predicate
+          |  is no longer satisfied.  Again, TreeSet is Traversable.
+          |  TreeSet also is also sorted.""") {
+    val treeSet = TreeSet(87, 44, 5, 4, 200, 10, 39, 100)
+    treeSet.dropWhile(_ < 100) should be(TreeSet(100, 200))
+  }
+
+  koan("""filter will take out all elements that don't satisfy a predicate. An
+          |  Array is also Traversable.""") {
+    val array = Array(87, 44, 5, 4, 200, 10, 39, 100)
+    array.filter(_ < 100) should be(Array(87, 44, 5, 4, 10, 39))
+  }
+
+  koan("""filterNot will take out all elements that satisfy a predicate. An
+          |  Array is also Traversable.""") {
+    val array = Array(87, 44, 5, 4, 200, 10, 39, 100)
+    array.filterNot(_ < 100) should be(Array(200, 100))
+  }
+
+  koan("""splitAt will split a Traversable at a position, returning a 2 product
+          |  Tuple.  Array is Traversable. splitAt is also defined as
+          |  (xs take n, xs drop n)""") {
+    val array = Array(87, 44, 5, 4, 200, 10, 39, 100)
+    val result = array splitAt 3
+    result._1 should be (Array(87, 44, 5))
+    result._2 should be (Array(4, 200, 10, 39, 100))
+  }
+
+  koan("""span will split a Traversable according to predicate, returning
+          |  a 2 product Tuple.  Array is Traversable, span
+          |  is also defined as (xs takeWhile p, xs dropWhile p)""") {
+    val array = Array(87, 44, 5, 4, 200, 10, 39, 100)
+    val result = array span (_ < 100)
+    result._1 should be (Array(87, 44, 5, 4))
+    result._2 should be (Array(200, 10, 39, 100))
+  }
+
+  koan("""partition will split a Traversable according to predicate, return
+          |  a 2 product Tuple. The left side are the elements satisfied by
+          |  the predicate, the right side is not. Array is Traversable,
+          |  partition is also defined as (xs filter p, xs filterNot p)""") {
+    val array = Array(87, 44, 5, 4, 200, 10, 39, 100)
+    val result = array partition (_ < 100)
+    result._1 should be (Array(87, 44, 5, 4, 10, 39))
+    result._2 should be (Array(200, 100))
+  }
+
+  koan("""groupBy will categorize a Traversable according to function, and return
+          a map with the results.  This koan uses Partial Function chaining.  If you are
+          still unfamiliar with PartialFunctions, see AboutPartialFunctions koans.""") {
+
+    val array = Array(87, 44, 5, 4, 200, 10, 39, 100)
+
+    val oddAndSmallPartial:PartialFunction[Int,String] = {
+       case x:Int if (x % 2 != 0 && x < 100) => "Odd and less than 100"
+    }
+
+    val evenAndSmallPartial:PartialFunction[Int,String] = {
+       case x:Int if (x != 0 && x % 2 == 0 && x < 100) => "Even and less than 100"
+    }
+
+    val negativePartial:PartialFunction[Int,String] = {
+       case x:Int if (x < 0) => "Negative Number"
+    }
+
+    val largePartial:PartialFunction[Int,String] = {
+       case x:Int if (x > 99) => "Large Number"
+    }
+
+    val zeroPartial:PartialFunction[Int,String] = {
+       case x:Int if (x == 0) => "Zero"
+    }
+
+    val result = array groupBy {
+      oddAndSmallPartial orElse
+      evenAndSmallPartial orElse
+      negativePartial orElse
+      largePartial orElse
+      zeroPartial
+    }
+
+    (result("Even and less than 100") size) should be(3)
+    (result("Large Number") size) should be(2)
+  }
+
+
+
+  //TODO:Transpose, withFilter
 }
