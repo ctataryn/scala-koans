@@ -291,8 +291,8 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
           |  (xs take n, xs drop n)""") {
     val array = Array(87, 44, 5, 4, 200, 10, 39, 100)
     val result = array splitAt 3
-    result._1 should be (Array(87, 44, 5))
-    result._2 should be (Array(4, 200, 10, 39, 100))
+    result._1 should be(Array(87, 44, 5))
+    result._2 should be(Array(4, 200, 10, 39, 100))
   }
 
   koan("""span will split a Traversable according to predicate, returning
@@ -300,8 +300,8 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
           |  is also defined as (xs takeWhile p, xs dropWhile p)""") {
     val array = Array(87, 44, 5, 4, 200, 10, 39, 100)
     val result = array span (_ < 100)
-    result._1 should be (Array(87, 44, 5, 4))
-    result._2 should be (Array(200, 10, 39, 100))
+    result._1 should be(Array(87, 44, 5, 4))
+    result._2 should be(Array(200, 10, 39, 100))
   }
 
   koan("""partition will split a Traversable according to predicate, return
@@ -310,8 +310,8 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
           |  partition is also defined as (xs filter p, xs filterNot p)""") {
     val array = Array(87, 44, 5, 4, 200, 10, 39, 100)
     val result = array partition (_ < 100)
-    result._1 should be (Array(87, 44, 5, 4, 10, 39))
-    result._2 should be (Array(200, 100))
+    result._1 should be(Array(87, 44, 5, 4, 10, 39))
+    result._2 should be(Array(200, 100))
   }
 
   koan("""groupBy will categorize a Traversable according to function, and return
@@ -320,39 +320,58 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
 
     val array = Array(87, 44, 5, 4, 200, 10, 39, 100)
 
-    val oddAndSmallPartial:PartialFunction[Int,String] = {
-       case x:Int if (x % 2 != 0 && x < 100) => "Odd and less than 100"
+    val oddAndSmallPartial: PartialFunction[Int, String] = {
+      case x: Int if (x % 2 != 0 && x < 100) => "Odd and less than 100"
     }
 
-    val evenAndSmallPartial:PartialFunction[Int,String] = {
-       case x:Int if (x != 0 && x % 2 == 0 && x < 100) => "Even and less than 100"
+    val evenAndSmallPartial: PartialFunction[Int, String] = {
+      case x: Int if (x != 0 && x % 2 == 0 && x < 100) => "Even and less than 100"
     }
 
-    val negativePartial:PartialFunction[Int,String] = {
-       case x:Int if (x < 0) => "Negative Number"
+    val negativePartial: PartialFunction[Int, String] = {
+      case x: Int if (x < 0) => "Negative Number"
     }
 
-    val largePartial:PartialFunction[Int,String] = {
-       case x:Int if (x > 99) => "Large Number"
+    val largePartial: PartialFunction[Int, String] = {
+      case x: Int if (x > 99) => "Large Number"
     }
 
-    val zeroPartial:PartialFunction[Int,String] = {
-       case x:Int if (x == 0) => "Zero"
+    val zeroPartial: PartialFunction[Int, String] = {
+      case x: Int if (x == 0) => "Zero"
     }
 
     val result = array groupBy {
       oddAndSmallPartial orElse
-      evenAndSmallPartial orElse
-      negativePartial orElse
-      largePartial orElse
-      zeroPartial
+              evenAndSmallPartial orElse
+              negativePartial orElse
+              largePartial orElse
+              zeroPartial
     }
 
     (result("Even and less than 100") size) should be(3)
     (result("Large Number") size) should be(2)
   }
 
+  koan("""forall will determine if a predicate is valid for all members of a
+          |  Traversable.""") {
+    val list = List(87, 44, 5, 4, 200, 10, 39, 100)
+    val result = list forall (_ < 100)
+    result should be(false)
+  }
 
+  koan("""`exists` should've been called `forsome`. `exists` will determine if a predicate
+          | is valid for some members of a Traversable.""") {
+    val list = List(87, 44, 5, 4, 200, 10, 39, 100)
+    val result = list exists (_ < 100)
+    result should be(true)
+  }
+
+  koan("""`count` will count the number of elements that satisfy a predicate
+          | in a Traversable.""") {
+    val list = List(87, 44, 5, 4, 200, 10, 39, 100)
+    val result = list count (_ < 100)
+    result should be(6)
+  }
 
   //TODO:Transpose, withFilter
 }
