@@ -3,7 +3,7 @@ package org.functionalkoans.forscala
 import org.scalatest.matchers.ShouldMatchers
 import support.KoanSuite
 import Stream._
-import collection.immutable.TreeSet
+import collection.immutable.{TreeMap, TreeSet}
 
 class AboutTraversables extends KoanSuite with ShouldMatchers {
 
@@ -373,12 +373,67 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
     result should be(6)
   }
 
+  koan(""" `/:` or `foldLeft` will combine an operation starting with a seed and combining from the left.  Fold Left
+           | is defined as (seed /: list), where seed is the initial value.  Once the fold is established, you
+           | provide a function that takes two arguments.  The first argument is the running total of the operation,
+           | and the second element is the next element of the list.
+           |
+           | Given a Traversable (x1, x2, x3, x4), an initial value of init, an operation op,
+           | foldLeft is defined as: (((init op x1) op x2) op x3) op x4)""") {
+
+    val list = List(5, 4, 3, 2, 1)
+    val result = (0 /: list) {
+      (`running total`, `next element`) => `running total` - `next element`
+    }
+    result should be(-15)
+
+    val result2 = list.foldLeft(0) {
+      (`running total`, `next element`) => `running total` - `next element`
+    }
+    result2 should be(-15)
+
+    val result3 = (0 /: list)(_ - _) //Short hand
+    result3 should be(-15)
+
+    val result4 = list.foldLeft(0)(_ - _)
+    result4 should be(-15)
+
+    (((((0 - 5) - 4) - 3) - 2) - 1) should be(-15)
+  }
+
+  koan(""" `:\` or foldRight` will combine an operation starting with a seed and combining from the right.  Fold right
+           | is defined as (list :\ seed), where seed is the initial value.  Once the fold is established, you
+           | provide a function that takes two elements.  The first is the next element of the list, and the
+           | second element is the running total of the operation.
+           |
+           | Given a Traversable (x1, x2, x3, x4), an initial value of init, an operation op,
+           | foldRight is defined as: x1 op (x2 op (x3 op (x4 op init)))""") {
+
+    val list = List(5, 4, 3, 2, 1)
+    val result = (list :\ 0) {
+      (`next element`, `running total`) => `next element` - `running total`
+    }
+    result should be(3)
+
+    val result2 = (list :\ 0) {
+      (`next element`, `running total`) => `next element` - `running total`
+    }
+    result2 should be(3)
+
+    val result3 = (list :\ 0)(_ - _) //Short hand
+    result3 should be(3)
+
+    val result4 = list.foldRight(0)(_ - _)
+    result4 should be(3)
+
+    (5 - (4 - (3 - (2 - (1 - 0))))) should be(3)
+  }
+
   koan("""`transpose` will take a traversable of traversables and group them by their position in
            |  it's own traversable.  E.g. ((x1, x2),(y1, y2)).transpose = (x1, y1), (x2, y2).
            |  or ((x1, x2),(y1, y2),(z1, z2)).transpose = ((x1, y1, z1), (x2, y2, z2), (x3, y3, z3))""") {
     val list = List(List(1, 2, 3), List(4, 5, 6), List(7, 8, 9))
     list.transpose should be(List(List(1, 4, 7), List(2, 5, 8), List(3, 6, 9)))
-
 
     val list2 = List(List(1), List(4))
     list2.transpose should be(List(List(1, 4)))
