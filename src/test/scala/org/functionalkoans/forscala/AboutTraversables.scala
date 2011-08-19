@@ -380,7 +380,6 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
            |
            | Given a Traversable (x1, x2, x3, x4), an initial value of init, an operation op,
            | foldLeft is defined as: (((init op x1) op x2) op x3) op x4)""") {
-
     val list = List(5, 4, 3, 2, 1)
     val result = (0 /: list) {
       (`running total`, `next element`) => `running total` - `next element`
@@ -429,6 +428,56 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
     (5 - (4 - (3 - (2 - (1 - 0))))) should be(3)
   }
 
+  koan("""`reduceLeft` is the similar to foldLeft, except that the seed is the head value""") {
+    val intList = List(5, 4, 3, 2, 1)
+    intList.reduceLeft {_ + _} should be(15)
+
+    val stringList = List("Do", "Re", "Me", "Fa", "So", "La", "Te", "Do")
+    stringList.reduceLeft {_ + _} should be ("DoReMeFaSoLaTeDo")
+  }
+
+  koan("""`reduceRight` is the similar to foldRight, except that the seed is the last value""") {
+    val intList = List(5, 4, 3, 2, 1)
+    intList.reduceRight {_ + _} should be(15)
+
+    val stringList = List("Do", "Re", "Me", "Fa", "So", "La", "Te", "Do")
+    stringList.reduceRight {_ + _} should be ("DoReMeFaSoLaTeDo")
+  }
+
+  koan("""There are some methods that take much of the folding work out by providing basic functionality.
+          |  `sum` will add all the elements, product will multiply, min would determine the smallest element, and
+          |  `max` the largest.""") {
+    val intList = List(5, 4, 3, 2, 1)
+    intList.sum should be(15)
+    intList.product should be (120)
+    intList.max should be (5)
+    intList.min should be (1)
+  }
+
+  koan("""You would choose foldLeft/reduceLeft or foldRight/reduceRight based on your mathematical goal.
+          | One other reason for deciding is performance.  foldLeft is more perfomant since it uses
+          | tail recursion and is optimized. This koan will either work or you will receieve a
+          | StackOverflowError. If you do receive a StackOverflowError, try reducing the MAX_SIZE value.""") {
+
+    val MAX_SIZE = 1000000
+    val reduceLeftStartTime = new java.util.Date
+    ((1 to MAX_SIZE) reduceLeft (_ + _))
+    val reduceLeftEndTime = new java.util.Date
+
+
+    val reduceRightStartTime = new java.util.Date
+    ((1 to MAX_SIZE) reduceRight (_ + _))
+    val reduceRightEndTime = new java.util.Date
+
+    val totalReduceLeftTime = (reduceLeftEndTime.getTime - reduceLeftStartTime.getTime)
+    val totalReduceRightTime = (reduceRightEndTime.getTime - reduceRightStartTime.getTime)
+
+    println(totalReduceLeftTime)
+    println(totalReduceRightTime)
+
+    (totalReduceRightTime > totalReduceLeftTime) should be(true)
+  }
+
   koan("""`transpose` will take a traversable of traversables and group them by their position in
            |  it's own traversable.  E.g. ((x1, x2),(y1, y2)).transpose = (x1, y1), (x2, y2).
            |  or ((x1, x2),(y1, y2),(z1, z2)).transpose = ((x1, y1, z1), (x2, y2, z2), (x3, y3, z3))""") {
@@ -438,6 +487,4 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
     val list2 = List(List(1), List(4))
     list2.transpose should be(List(List(1, 4)))
   }
-
-  //TODO: withFilter
 }
