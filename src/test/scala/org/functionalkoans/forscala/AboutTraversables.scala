@@ -430,18 +430,26 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
 
   koan("""`reduceLeft` is the similar to foldLeft, except that the seed is the head value""") {
     val intList = List(5, 4, 3, 2, 1)
-    intList.reduceLeft {_ + _} should be(15)
+    intList.reduceLeft {
+      _ + _
+    } should be(15)
 
     val stringList = List("Do", "Re", "Me", "Fa", "So", "La", "Te", "Do")
-    stringList.reduceLeft {_ + _} should be ("DoReMeFaSoLaTeDo")
+    stringList.reduceLeft {
+      _ + _
+    } should be("DoReMeFaSoLaTeDo")
   }
 
   koan("""`reduceRight` is the similar to foldRight, except that the seed is the last value""") {
     val intList = List(5, 4, 3, 2, 1)
-    intList.reduceRight {_ + _} should be(15)
+    intList.reduceRight {
+      _ + _
+    } should be(15)
 
     val stringList = List("Do", "Re", "Me", "Fa", "So", "La", "Te", "Do")
-    stringList.reduceRight {_ + _} should be ("DoReMeFaSoLaTeDo")
+    stringList.reduceRight {
+      _ + _
+    } should be("DoReMeFaSoLaTeDo")
   }
 
   koan("""There are some methods that take much of the folding work out by providing basic functionality.
@@ -449,9 +457,9 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
           |  `max` the largest.""") {
     val intList = List(5, 4, 3, 2, 1)
     intList.sum should be(15)
-    intList.product should be (120)
-    intList.max should be (5)
-    intList.min should be (1)
+    intList.product should be(120)
+    intList.max should be(5)
+    intList.min should be(1)
   }
 
   koan("""You would choose foldLeft/reduceLeft or foldRight/reduceRight based on your mathematical goal.
@@ -486,5 +494,60 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
 
     val list2 = List(List(1), List(4))
     list2.transpose should be(List(List(1, 4)))
+  }
+
+  koan("""`mkString` will format a Traversable using a given string as the delimiter.""") {
+    val list = List(1, 2, 3, 4, 5)
+    list.mkString(",") should be("1,2,3,4,5")
+  }
+
+  koan("""`mkString` will also take a beginning and ending string to surround the list.""") {
+    val list = List(1, 2, 3, 4, 5)
+    list.mkString(">", ",", "<") should be(">1,2,3,4,5<")
+  }
+
+  koan("""`addString` will take a StringBuilder to add the contents of list into the builder.""") {
+    val stringBuilder = new StringBuilder()
+    val list = List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
+    stringBuilder.append("I want all numbers 6-12: ")
+    list.filter(it => it > 5 && it < 13).addString(stringBuilder, ",")
+    stringBuilder.mkString should be("I want all numbers 6-12: 6,7,8,9,10,11,12")
+  }
+
+  koan("Traversables can have views which allow you to efficiently do compound work.") {
+    val lst = List(1, 2, 3)
+    var history = List[String]()
+
+    def addHistory(s: String) {
+      history = history :+ s
+    }
+
+    lst.map {x => addHistory("Doubling %s".format(x)); x * 2}
+       .map {x => addHistory("Adding 1 to %s".format(x)); x + 1}
+
+    history(0) should be("Doubling 1")
+    history(1) should be("Doubling 2")
+    history(2) should be("Doubling 3")
+    history(3) should be("Adding 1 to 2")
+    history(4) should be("Adding 1 to 4")
+    history(5) should be("Adding 1 to 6")
+
+    history = List[String]()
+
+    lst.view.map {x => addHistory("Doubling %s".format(x)); x * 2}
+            .map {x => addHistory("Adding 1 to %s".format(x)); x + 1}.force
+
+    history(0) should be("Doubling 1")
+    history(1) should be("Adding 1 to 2")
+    history(2) should be("Doubling 2")
+    history(3) should be("Adding 1 to 4")
+    history(4) should be("Doubling 3")
+    history(5) should be("Adding 1 to 6")
+  }
+
+  koan("""Views can also accept a `to` and `from` value which takes the substring and performs your view
+         |  functions on the subset.""") {
+    val list = List(1,2,3,4,5,6,7,8)
+    list.view(3,6).map(_+2).map(_*10).force should be (List(60,70,80))
   }
 }

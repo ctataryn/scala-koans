@@ -122,40 +122,5 @@ class AboutLists extends KoanSuite with ShouldMatchers {
     c.tail should be(List())
   }
 
-  koan("Lists can have views which allow you to efficiently do compound work") {
-    val lst = List(1, 2, 3)
-    var history = List[String]()
-
-    def addHistory(s: String) {
-      history = history :+ s
-    }
-
-    lst.map {
-      x => addHistory("Doubling %s".format(x)); x * 2
-    }.map {
-      x => addHistory("Adding 1 to %s".format(x)); x + 1
-    }
-
-    history(0) should be("Doubling 1")
-    history(1) should be("Doubling 2")
-    history(2) should be("Doubling 3")
-    history(3) should be("Adding 1 to 2")
-    history(4) should be("Adding 1 to 4")
-    history(5) should be("Adding 1 to 6")
-
-    history = List[String]()
-
-    lst.view.map {
-      x => addHistory("Doubling %s".format(x)); x * 2
-    }.map {
-      x => addHistory("Adding 1 to %s".format(x)); x + 1
-    }.force
-
-    history(0) should be("Doubling 1")
-    history(1) should be("Adding 1 to 2")
-    history(2) should be("Doubling 2")
-    history(3) should be("Adding 1 to 4")
-    history(4) should be("Doubling 3")
-    history(5) should be("Adding 1 to 6")
-  }
+  //For more about what lists can do, visit AboutTraversables.scala koans
 }
