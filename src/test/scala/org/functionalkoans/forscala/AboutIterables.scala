@@ -79,4 +79,14 @@ class AboutIterables extends KoanSuite with ShouldMatchers {
     val xs = List("Manny", "Moe", "Jack")
     xs.zipWithIndex should be(List(("Manny", 0), ("Moe", 1), ("Jack", 2)))
   }
+
+  koan("""`sameElements` will return true if the two iterables have the same number of elements""") {
+    val xs = List("Manny", "Moe", "Jack")
+    val ys = List("Manny", "Moe", "Jack")
+    (xs sameElements ys) should be (true)
+
+    val xs1 = Set(3,2,1,4,5,6,7)
+    val ys1 = Set(7,2,1,4,5,6,3)
+    (xs1 sameElements ys1) should be (true)
+  }
 }
