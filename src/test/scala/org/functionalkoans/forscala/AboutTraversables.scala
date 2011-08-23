@@ -480,9 +480,6 @@ class AboutTraversables extends KoanSuite with ShouldMatchers {
     val totalReduceLeftTime = (reduceLeftEndTime.getTime - reduceLeftStartTime.getTime)
     val totalReduceRightTime = (reduceRightEndTime.getTime - reduceRightStartTime.getTime)
 
-    println(totalReduceLeftTime)
-    println(totalReduceRightTime)
-
     (totalReduceRightTime > totalReduceLeftTime) should be(true)
   }
 
