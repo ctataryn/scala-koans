@@ -4,4 +4,9 @@ equality
 case class inheritance
 objects?
 inner classes
+while it control structures
+for loop and for loop comprehension
+DSLs
+putting a method in to a function
+CanBuildFrom newBuilder
 
