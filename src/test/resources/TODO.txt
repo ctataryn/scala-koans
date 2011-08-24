@@ -1,14 +1,18 @@
 type members
-apply/unapply methods
+self types
+apply/unapply extractor methods
 equality
 case class inheritance
 objects?
 inner classes
-while it control structures
+while if control structures
 for loop and for loop comprehension
 DSLs
 putting a method in to a function
 CanBuildFrom newBuilder
-
 @bridge @tailrec and other notations
+sealed traits and object
+associativity? is that covered? I believe it was.
+uses of with keyword there are some various reasons to use em.
+structural types
 
