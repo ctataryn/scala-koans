@@ -14,5 +14,30 @@ CanBuildFrom newBuilder
 sealed traits and object
 associativity? is that covered? I believe it was.
 uses of with keyword there are some various reasons to use em.
+new Object with {}
 structural types
+existential
+higher kinded
 
+def (x : => Int) = x()
+
+shorthand implicit def
+
+class A {
+  type Abstract
+  def method: Abstract
+}
+class B extends A {
+  type Abstract <: Seq[Int]  // still abstract but implementation of method must return a Seq[Int] or subtype
+}
+class C extends A {
+  type Abstract = List[Int]
+  def method = Nil
+}
+
+object OtherUses {
+  type X = java.io.File
+  println(new X("/"))
+  type Y[T] = Se1q[T]  // Y[Int] = Seq[Int], Y[String] = Seq[String], etc.
+  type FromStringTo[T] = String=>T  // FromStringTo[Int] = String=>Int; FromStringToT[_] = String => _
+  def methodWithContextBound[A : FromStringTo](x: A) = null // there must a an implicit String=>A in scope
