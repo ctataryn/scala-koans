@@ -5,9 +5,9 @@ import org.scalatest.matchers.ShouldMatchers
 
 class AboutEnumerations extends KoanSuite with ShouldMatchers {
 
-
-  koan("To create an enumeration, create an object that extends the abstract class Enumeration, " +
-          "and set a val variable to the method Value.  This is a trick to give values to each val.") {
+// To create an enumeration, create an object that extends the abstract class Enumeration,
+//          and set a val variable to the method Value.  This is a trick to give values to each val."
+  koan("Value assigns a numerical value to fields") {
 
     object Planets extends Enumeration {
       //Value is a def that assigns 0 to Mercury
@@ -48,8 +48,9 @@ class AboutEnumerations extends KoanSuite with ShouldMatchers {
     (Planets.Neptune == Planets.Jupiter) should be(false)
   }
 
-  koan("""You can create an enumeration with your own index and your own Strings, in this koan,
-          | we will start with an index of one and use Greek names instead of Roman""") {
+// You can create an enumeration with your own index and your own Strings, in this koan,
+// we will start with an index of one and use Greek names instead of Roman
+  koan("Enumerations can set their own index and name") {
     object GreekPlanets extends Enumeration {
 
       //Value is a def that assigns an idx of 1 and name of Hermes to Mercury
@@ -91,7 +92,8 @@ class AboutEnumerations extends KoanSuite with ShouldMatchers {
     (GreekPlanets.Neptune == GreekPlanets.Jupiter) should be(false)
   }
 
-  koan("""Enumerations can be declared in one line if you are merely setting variables to Value""") {
+// Enumerations can be declared in one line if you are merely setting variables to Value
+  koan("Enumeration declarations can be done on one line") {
     object Planets extends Enumeration {
       val Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto = Value
     }
@@ -107,7 +109,7 @@ class AboutEnumerations extends KoanSuite with ShouldMatchers {
   }
 
 
-  koan("""Enumerations can be declared with a string value only""") {
+  koan("Enumerations can be declared with a string value only") {
     object GreekPlanets extends Enumeration {
 
       //Value is a def that assigns a name of Hermes to Mercury
