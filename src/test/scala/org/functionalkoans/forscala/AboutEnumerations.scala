@@ -3,6 +3,7 @@ package org.functionalkoans.forscala
 import support.KoanSuite
 import org.scalatest.matchers.ShouldMatchers
 
+
 class AboutEnumerations extends KoanSuite with ShouldMatchers {
 
 // To create an enumeration, create an object that extends the abstract class Enumeration,
@@ -10,31 +11,14 @@ class AboutEnumerations extends KoanSuite with ShouldMatchers {
   koan("Value assigns a numerical value to fields") {
 
     object Planets extends Enumeration {
-      //Value is a def that assigns 0 to Mercury
       val Mercury = Value
-
-      //Value is a def that assigns 1 to Venus
       val Venus = Value
-
-      //Value is a def that assigns 2 to Earth
       val Earth = Value
-
-      //Value is a def that assigns 3 to Mars
       val Mars = Value
-
-      //Value is a def that assigns 4 to Jupiter
       val Jupiter = Value
-
-      //Value is a def that assigns 5 to Saturn
       val Saturn = Value
-
-      //Value is a def that assigns 6 to Uranus
       val Uranus = Value
-
-      //Value is a def that assigns 7 to Neptune
       val Neptune = Value
-
-      //Value is a def that assigns 8 to Pluto
       val Pluto = Value
     }
 
@@ -53,32 +37,15 @@ class AboutEnumerations extends KoanSuite with ShouldMatchers {
   koan("Enumerations can set their own index and name") {
     object GreekPlanets extends Enumeration {
 
-      //Value is a def that assigns an idx of 1 and name of Hermes to Mercury
       val Mercury = Value(1, "Hermes")
-
-      //Value is a def that assigns an idx of 2 and name of Aphrodite to Venus
       val Venus = Value(2, "Aphrodite")
-
-      //Value is a def that assigns and idx of 3 and name Gaia to Earth
       //FYI: Tellus is Roman for (Mother) Earth
       val Earth = Value(3, "Gaia")
-
-      //Value is a def that assigns and idx of 4 and name Ares to Mars
       val Mars = Value(4, "Ares")
-
-      //Value is a def that assigns and idx of 5 and name Zeus to Jupiter
       val Jupiter = Value(5, "Zeus")
-
-      //Value is a def that assigns and idx of 6 and name Cronus to Saturn
       val Saturn = Value(6, "Cronus")
-
-      //Value is a def that assigns and idx of 7 and name Ouranus to Uranus
       val Uranus = Value(7, "Ouranus")
-
-      //Value is a def that assigns and idx of 8 and name Poseidon to Neptune
       val Neptune = Value(8, "Poseidon")
-
-      //Value is a def that assigns and idx of 9 and name Hades to Pluto
       val Pluto = Value(9, "Hades")
     }
 
@@ -112,32 +79,14 @@ class AboutEnumerations extends KoanSuite with ShouldMatchers {
   koan("Enumerations can be declared with a string value only") {
     object GreekPlanets extends Enumeration {
 
-      //Value is a def that assigns a name of Hermes to Mercury
       val Mercury = Value("Hermes")
-
-      //Value is a def that assigns a name of Aphrodite to Venus
       val Venus = Value("Aphrodite")
-
-      //Value is a def that assigns a name of Gaia to Earth
-      //FYI: Tellus is Roman for (Mother) Earth
       val Earth = Value("Gaia")
-
-      //Value is a def that assigns a name of Ares to Mars
       val Mars = Value("Ares")
-
-      //Value is a def that assigns a name of Zeus to Jupiter
       val Jupiter = Value("Zeus")
-
-      //Value is a def that assigns a name of Cronus to Saturn
       val Saturn = Value("Cronus")
-
-      //Value is a def that assigns a name of Ouranus to Uranus
       val Uranus = Value("Ouranus")
-
-      //Value is a def that assigns a name of Poseidon to Neptune
       val Neptune = Value("Poseidon")
-
-      //Value is a def that assigns a name of Hades to Pluto
       val Pluto = Value("Hades")
     }
 
@@ -165,31 +114,14 @@ class AboutEnumerations extends KoanSuite with ShouldMatchers {
         def surfaceWeight(otherMass: Double) = otherMass * surfaceGravity
       }
 
-      //Value is a def that assigns 0 to Mercury
       val Mercury = new PlanetValue(0, "Mercury", 3.303e+23, 2.4397e6)
-
-      //Value is a def that assigns 1 to Venus
       val Venus = new PlanetValue(1, "Venus", 4.869e+24, 6.0518e6)
-
-      //Value is a def that assigns 2 to Earth
       val Earth = new PlanetValue(2, "Earth", 5.976e+24, 6.37814e6)
-
-      //Value is a def that assigns 3 to Mars
       val Mars = new PlanetValue(3, "Mars", 6.421e+23, 3.3972e6)
-
-      //Value is a def that assigns 4 to Jupiter
       val Jupiter = new PlanetValue(4, "Jupiter", 1.9e+27, 7.1492e7)
-
-      //Value is a def that assigns 5 to Saturn
       val Saturn = new PlanetValue(5, "Saturn", 5.688e+26, 6.0268e7)
-
-      //Value is a def that assigns 6 to Uranus
       val Uranus = new PlanetValue(6, "Uranus", 8.686e+25, 2.5559e7)
-
-      //Value is a def that assigns 7 to Neptune
       val Neptune = new PlanetValue(7, "Neptune", 1.024e+26, 2.4746e7)
-
-      //Value is a def that assigns 8 to Pluto
       val Pluto = new PlanetValue(8, "Pluto", 1.27e+22, 1.137e6)
 
     }
