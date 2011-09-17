@@ -124,27 +124,7 @@ class AboutSets extends KoanSuite with ShouldMatchers {
 
     mySet1.equals(mySet2) should be(true)
   }
-  /*
-    koan("Map keys may be of mixed type") {
-    val myMap = Map("Ann Arbor" ->"MI", 49931 -> "MI")
-    myMap("Ann Arbor") should be ("MI")
-    myMap(49931) should be ("MI")
-  }
-
-     koan("Mixed type values can be added to a map ") {
-    val myMap = scala.collection.mutable.Map.empty[String, Any]
-    myMap("Ann Arbor") = (48103, 48104, 48108)
-    myMap("Houghton") = 49931
-
-    myMap("Houghton") should be (49931)
-    myMap("Ann Arbor") should be ((48103, 48104, 48108))
-
-
-
-    // what happens if you change the Any to Int
-
-  }
-  */
+  
 
 
 }
