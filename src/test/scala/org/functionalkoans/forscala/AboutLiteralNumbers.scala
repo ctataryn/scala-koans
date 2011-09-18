@@ -14,15 +14,15 @@ class AboutLiteralNumbers extends KoanSuite with ShouldMatchers {
     val g = -31
     val h = -0x30F
     val i = -077
-    a should be(__)
-    b should be(__)
-    c should be(__) //Hint: 30F = 783
-    d should be(__) //Hint: 077 = 63
-    e should be(__)
-    f should be(__)
-    g should be(__)
-    h should be(__) //Hint: 30F = 783
-    i should be(__) //Hint: 077 = 63
+    a should be(2)
+    b should be(31)
+    c should be(783) //Hint: 30F = 783
+    d should be(63) //Hint: 077 = 63
+    e should be(0)
+    f should be(-2)
+    g should be(-31)
+    h should be(-783) //Hint: 30F = 783
+    i should be(-63) //Hint: 077 = 63
   }
 
   koan("""Long Literals are 64 bit, are specified by appending an L or l at the end;
@@ -37,15 +37,15 @@ class AboutLiteralNumbers extends KoanSuite with ShouldMatchers {
     val h = -0x30FL
     val i = -077L
 
-    a should be(__)
-    b should be(__)
-    c should be(__) //Hint: 30F = 783
-    d should be(__) //Hint: 077 = 73
-    e should be(__)
-    f should be(__)
-    g should be(__)
-    h should be(__) //Hint: 30F = 783
-    i should be(__) //Hint: 077 = 63
+    a should be(2)
+    b should be(31)
+    c should be(783) //Hint: 30F = 783
+    d should be(63) //Hint: 077 = 63
+    e should be(0)
+    f should be(-2)
+    g should be(-31)
+    h should be(-783) //Hint: 30F = 783
+    i should be(-63) //Hint: 077 = 63
   }
 
   koan("""Float and Double Literals are IEEE 754 for specific,
@@ -64,26 +64,26 @@ class AboutLiteralNumbers extends KoanSuite with ShouldMatchers {
     val h = 0.0
     val i = 9.23E-9D
 
-    a should be(__)
-    b should be(__)
-    c should be(__)
-    d should be(__)
-    e should be(__)
-    f should be(__)
-    g should be(__)
-    h should be(__)
-    i should be(__)
+    a should be(3.0)
+    b should be(3.0)
+    c should be(2.73)
+    d should be(3.0)
+    e should be(3.22)
+    f should be(93e-9)
+    g should be(93E-9)
+    h should be(0.0)
+    i should be(9.23E-9D)
   }
 
 
   koan("""Trick: To distinguish the dot for a method invocation from the
           |   decimal point in a float or double literal,
           |   add a space after the literal""") {
-    3.0.toString should be(__)
-    3.toString should be(__)
-    (3. toString) should be(__)
-    (3.0 toString) should be(__)
-    3d.toString should be(__)
+    3.0.toString should be("3.0")
+    3.toString should be("3")
+    (3. toString) should be("3.0")
+    (3.0 toString) should be("3.0")
+    3d.toString should be("3.0")
   }
 
 }
