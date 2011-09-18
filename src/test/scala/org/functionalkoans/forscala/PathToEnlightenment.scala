@@ -1,4 +1,4 @@
-package org.functionalkoans.forscala
+pckage org.functionalkoans.forscala
 
 import org.scalatest.Suite
 import org.scalatest.junit.JUnitRunner
@@ -8,7 +8,9 @@ import org.junit.runner.RunWith
 class PathToEnlightenment extends Suite {
   override def nestedSuites = List(new AboutAsserts,
     new AboutValAndVar,
-    new AboutLiterals,
+    new AboutLiteralBooleans,
+    new AboutLiteralNumbers,
+    new AboutLiteralStrings,
     new AboutConstructors,
     new AboutTuples,
     new AboutLists,

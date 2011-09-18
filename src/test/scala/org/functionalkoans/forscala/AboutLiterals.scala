@@ -80,7 +80,7 @@ class AboutLiterals extends KoanSuite with ShouldMatchers {
           |   float or double literal add a space after the literal""") {
     3.0.toString should be("3.0")
     3.toString should be("3")
-    (3.toString) should be("3.0")
+    (3. toString) should be("3.0")
     (3.0 toString) should be("3.0")
     3d.toString should be("3.0")
   }
