@@ -1,4 +1,4 @@
-pckage org.functionalkoans.forscala
+package org.functionalkoans.forscala
 
 import org.scalatest.Suite
 import org.scalatest.junit.JUnitRunner
